@@ -20,18 +20,26 @@ public class SistemaTarefasSpringApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args){
-		//Tarefa tarefa = new Tarefa("Teste2" ,"Descricao", 1, "Feito", "Eu Mesmo" );
-		//listaTarefas.addTarefa(tarefa);
+//		Tarefa tarefa = new Tarefa("Te6Po" ,"Descricao", 2, "Não", "Alguem" );
+//		listaTarefas.addTarefa(tarefa);
 
-		//Query Nativa
-		int contarTarefas = listaTarefas.contarPorStatus("Feito");
-		System.out.println(contarTarefas);
+//		//Query Nativa
+//		int contarTarefas = listaTarefas.contarPorStatus("Feito");
+//		System.out.println(contarTarefas);
+//
+//		//JPQL
+//		List<Tarefa> tarefasOrdenadas = listaTarefas.listarOrdenadoPorPrioridade();
+//		tarefasOrdenadas.forEach(System.out::println);
 
-		//JPQL
-		List<Tarefa> tarefasOrdenadas = listaTarefas.listarOrdenadoPorPrioridade();
-		tarefasOrdenadas.forEach(System.out::println);
-
+		//DERIVADAS
 		List<Tarefa> responsaveis = listaTarefas.filtrarPorResponsavel("Eu Mesmo");
 		System.out.println(responsaveis);
+
+		List<Tarefa> status = listaTarefas.filtrarPorStatus("Feito");
+		status.forEach(System.out::println);
+
+		List<Tarefa> prioridade = listaTarefas.filtrarPorPrioridade(2);
+		prioridade.forEach(System.out::println);
+
 	}
 }
