@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class Tarefa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(name = "titulo_tarefa")
     private String titulo;
@@ -46,4 +46,34 @@ public class Tarefa {
                 ", responsavel='" + responsavel + '\'' +
                 '}';
     }
+
+    public void atualizarStatus (String novoStatus){
+       this.status = novoStatus;
+
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public int getPrioridade() {
+        return prioridade;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getResponsavel() {
+        return responsavel;
+    }
+
 }
