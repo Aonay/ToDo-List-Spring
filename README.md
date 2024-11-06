@@ -19,7 +19,7 @@ Aplicação de gerenciamento de tarefas (TODOList) desenvolvida em Java usando S
 
 ## Princípios e Paradigmas Utilizados
 
-- **POO (Programação Orientada a Objetos)**: Estrutura baseada em classes que encapsulam dados e funcionalidades.
+- **POO (Programação Orientada a Objeto)**: Estrutura baseada em classes que encapsulam dados e funcionalidades.
 - **Injeção de Dependência**: Reduz acoplamento ao injetar serviços automaticamente com `@Autowired`.
 - **Repository Pattern**: Camada de repositório para abstração e separação entre lógica de negócios e persistência de dados.
 
