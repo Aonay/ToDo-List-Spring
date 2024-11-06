@@ -1,5 +1,4 @@
 package br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING;
-
 import br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING.service.ListaTarefas;
 import br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING.model.Tarefa;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ public class SistemaTarefasSpringApplication implements CommandLineRunner {
 
 	@Autowired
 	private ListaTarefas listaTarefas;
-
 	private static final Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
@@ -72,13 +70,10 @@ public class SistemaTarefasSpringApplication implements CommandLineRunner {
 		int prioridade = scanner.nextInt();
 		scanner.nextLine();
 
-		System.out.println("Status inicial da tarefa:");
-		String status = scanner.nextLine().toLowerCase();
-
 		System.out.println("Responsável pela tarefa:");
 		String responsavel = scanner.nextLine().toLowerCase();
 
-		Tarefa tarefa = new Tarefa(titulo, descricao, prioridade, status, responsavel);
+		Tarefa tarefa = new Tarefa(titulo, descricao, prioridade, responsavel);
 		listaTarefas.addTarefa(tarefa);
 		System.out.println("Tarefa adicionada com sucesso.");
 	}
@@ -106,14 +101,30 @@ public class SistemaTarefasSpringApplication implements CommandLineRunner {
 	}
 
 	private void atualizarStatus() {
+		String novoStatus;
 		System.out.println("Digite o ID da tarefa:");
 		Long id = scanner.nextLong();
 		scanner.nextLine(); // Limpa o buffer do scanner
 
 		System.out.println("Digite o novo status:");
-		String novoStatus = scanner.nextLine();
+		System.out.println("""
+				1 - Pendente
+				2 - Em Andamento
+				3 - Concluído
+				""");
 
-		listaTarefas.atualizarStatusTarefa(id, novoStatus);
+		int opcao = scanner.nextInt();
+		switch(opcao) {
+			case 1:
+				novoStatus = "pendente";
+				listaTarefas.atualizarStatusTarefa(id, novoStatus);
+			case 2:
+				novoStatus = "em andamento";
+				listaTarefas.atualizarStatusTarefa(id, novoStatus);
+			case 3:
+				novoStatus = "concluído";
+				listaTarefas.atualizarStatusTarefa(id, novoStatus);
+		}
 		System.out.println("Status atualizado com sucesso.");
 	}
 
@@ -137,22 +148,6 @@ public class SistemaTarefasSpringApplication implements CommandLineRunner {
 
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //		Tarefa tarefa = new Tarefa("Te6Po" ,"Descricao", 2, "Não", "Alguem" );
 //		listaTarefas.addTarefa(tarefa);
@@ -182,4 +177,3 @@ public class SistemaTarefasSpringApplication implements CommandLineRunner {
 //		listaTarefas.excluirTarefa(5L);
 //
 //		listaTarefas.exibirTarefa(3L);
-

@@ -23,16 +23,14 @@ public class Tarefa {
     @Column(name = "responsavel")
     private String responsavel;
 
-    public Tarefa(String titulo, String descricao, int prioridade, String status, String responsavel) {
+    public Tarefa(String titulo, String descricao, int prioridade,  String responsavel) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.prioridade = prioridade;
-        this.status = status;
+        this.status = "Pendente";
         this.responsavel = responsavel;
     }
-
     public Tarefa(){
-
     }
 
     @Override
@@ -45,11 +43,6 @@ public class Tarefa {
                 ", status='" + status + '\'' +
                 ", responsavel='" + responsavel + '\'' +
                 '}';
-    }
-
-    public void atualizarStatus (String novoStatus){
-       this.status = novoStatus;
-
     }
 
     public long getId() {
@@ -75,5 +68,4 @@ public class Tarefa {
     public String getResponsavel() {
         return responsavel;
     }
-
 }

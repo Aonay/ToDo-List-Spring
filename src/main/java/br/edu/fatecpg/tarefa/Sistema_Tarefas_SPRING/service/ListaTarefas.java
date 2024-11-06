@@ -17,12 +17,12 @@ public class ListaTarefas {
     public ListaTarefas() {
     }
 
-    public void addTarefa(Tarefa tarefa){
+    public void addTarefa(Tarefa tarefa) {
         repository.save(tarefa);
         tarefas.add(tarefa);
     }
 
-    public Tarefa buscarTarefaID(Long id){
+    public Tarefa buscarTarefaID(Long id) {
         return repository.findById(id).orElse(null);
     }
 
@@ -30,10 +30,10 @@ public class ListaTarefas {
         return repository.findAll();
     }
 
-
     //DERIVADAS
-
-    public List<Tarefa> filtrarPorStatus(String status) { return repository.findByStatus(status); }
+    public List<Tarefa> filtrarPorStatus(String status) {
+        return repository.findByStatus(status);
+    }
 
     public List<Tarefa> filtrarPorPrioridade(int prioridade) {
         return repository.findByPrioridade(prioridade);
@@ -44,23 +44,24 @@ public class ListaTarefas {
     }
 
     //NATIVA
-
     public int contarPorStatus(String status) {
         return repository.contarPorStatus(status);
     }
 
     //JPQL
-
     public List<Tarefa> listarOrdenadoPorPrioridade() {
         return repository.encontrarPorPrioridade();
     }
 
-    public void atualizarStatusTarefa(Long id, String novoStatus) { repository.atualizarStatusPorId(id, novoStatus); }
+    public void atualizarStatusTarefa(Long id, String novoStatus) {
+        repository.atualizarStatusPorId(id, novoStatus);
+    }
 
-    public void atualizarResponsavelTarefa(Long id, String novoResponsavel) { repository.atualizarResponsavelPorId(id, novoResponsavel); }
+    public void atualizarResponsavelTarefa(Long id, String novoResponsavel) {
+        repository.atualizarResponsavelPorId(id, novoResponsavel);
+    }
 
     public void exibirTarefa(Long id) {
-
         Optional<Tarefa> tarefaOpt = repository.findById(id);
 
         if (tarefaOpt.isPresent()) {
@@ -76,10 +77,7 @@ public class ListaTarefas {
         }
     }
 
-    public void excluirTarefa(Long id) { repository.excluirPorId(id); }
-
-
-
-
-
+    public void excluirTarefa(Long id) {
+        repository.excluirPorId(id);
+    }
 }

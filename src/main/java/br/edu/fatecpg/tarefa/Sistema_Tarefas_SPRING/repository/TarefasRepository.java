@@ -41,5 +41,4 @@ public interface TarefasRepository extends JpaRepository<Tarefa, Long> {
    @Transactional
    @Query("DELETE Tarefa t WHERE t.id = :id")
    void excluirPorId(Long id);
-
 }
