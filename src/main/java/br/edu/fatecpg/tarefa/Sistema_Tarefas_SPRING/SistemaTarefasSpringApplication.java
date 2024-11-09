@@ -74,7 +74,7 @@ public class SistemaTarefasSpringApplication implements CommandLineRunner {
 		String responsavel = scanner.nextLine().toLowerCase();
 
 		Tarefa tarefa = new Tarefa(titulo, descricao, prioridade, responsavel);
-		listaTarefas.addTarefa(tarefa);
+		listaTarefas.salvarTarefa(tarefa);
 		System.out.println("Tarefa adicionada com sucesso.");
 	}
 

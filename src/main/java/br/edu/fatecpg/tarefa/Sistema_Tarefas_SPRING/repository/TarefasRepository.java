@@ -1,5 +1,4 @@
 package br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING.repository;
-
 import br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING.model.Tarefa;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;

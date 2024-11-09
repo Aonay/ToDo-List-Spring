@@ -18,7 +18,7 @@ public class Tarefa {
     private int prioridade;
 
     @Column(name = "status")
-    private String status;
+    private String status = "Pendente";
 
     @Column(name = "responsavel")
     private String responsavel;
@@ -31,18 +31,6 @@ public class Tarefa {
         this.responsavel = responsavel;
     }
     public Tarefa(){
-    }
-
-    @Override
-    public String toString() {
-        return "Tarefas{" +
-                "id=" + id +
-                ", titulo='" + titulo + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", prioridade=" + prioridade +
-                ", status='" + status + '\'' +
-                ", responsavel='" + responsavel + '\'' +
-                '}';
     }
 
     public long getId() {
@@ -67,5 +55,41 @@ public class Tarefa {
 
     public String getResponsavel() {
         return responsavel;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setPrioridade(int prioridade) {
+        this.prioridade = prioridade;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setResponsavel(String responsavel) {
+        this.responsavel = responsavel;
+    }
+
+    @Override
+    public String toString() {
+        return "Tarefas{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", prioridade=" + prioridade +
+                ", status='" + status + '\'' +
+                ", responsavel='" + responsavel + '\'' +
+                '}';
     }
 }
