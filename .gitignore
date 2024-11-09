@@ -1,1 +1,65 @@
-target/
+# Diretórios e arquivos de sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos e pastas de IDEs (IntelliJ IDEA, VS Code, etc.)
+.idea/
+*.iml
+.vscode/
+
+# Arquivos de classe Java
+*.class
+
+# Diretórios de build
+/target/
+out/
+/bin/
+
+# Dependências do Maven e Gradle
+/.mvn/
+mvnw
+mvnw.cmd
+/gradle/
+/.gradle/
+/build/
+
+# Arquivo de logs
+*.log
+
+# Arquivos temporários
+*.swp
+*.tmp
+
+# Arquivos de configuração de segurança e dados sensíveis
+application.properties
+application.yml
+application-*.properties
+application-*.yml
+*.secret
+*.env
+
+# Arquivos de cache
+/.cache
+/.springBeans
+/node_modules
+/.npm
+
+# Arquivos de teste e relatórios de cobertura
+/test-output/
+/test-results/
+/coverage/
+/.cobertura/
+jacoco.exec
+
+# Relatórios gerados por ferramentas de análise de código
+/target/site/
+/reports/
+*.xml
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+
+# Outros arquivos específicos do projeto (ajustar conforme necessário)
+logs/
+!src/main/resources/logback-spring.xml # Exemplo de manter o arquivo de configuração de log
