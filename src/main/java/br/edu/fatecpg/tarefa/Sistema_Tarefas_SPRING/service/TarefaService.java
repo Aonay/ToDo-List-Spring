@@ -1,14 +1,14 @@
 package br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING.service;
 import br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING.model.Tarefa;
 import br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING.repository.TarefasRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ListaTarefas {
-
+public class TarefaService {
     @Autowired
     private TarefasRepository repository;
 
@@ -20,24 +20,20 @@ public class ListaTarefas {
         return repository.findById(id);
     }
 
-    public List<Tarefa> listarTodas() {
+    public List<Tarefa> buscarTodas() {
         return repository.findAll();
     }
 
-    public void exibirTarefa(Long id) {
-        Optional<Tarefa> tarefaOpt = repository.findById(id);
-
-        if (tarefaOpt.isPresent()) {
-            Tarefa tarefa = tarefaOpt.get();
-            System.out.println("ID: " + tarefa.getId());
-            System.out.println("Título: " + tarefa.getTitulo());
-            System.out.println("Descrição: " + tarefa.getDescricao());
-            System.out.println("Prioridade: " + tarefa.getPrioridade());
-            System.out.println("Status: " + tarefa.getStatus());
-            System.out.println("Responsável: " + tarefa.getResponsavel());
-        } else {
-            System.out.println("Tarefa com ID " + id + " não encontrada.");
-        }
+    @Transactional
+    public Optional<Tarefa> atualizarTarefa(Long id, Tarefa tarefaAtualizada) {
+        return buscarTarefaPorId(id).map(tarefaExistente -> {
+            tarefaExistente.setTitulo(tarefaAtualizada.getTitulo());
+            tarefaExistente.setDescricao(tarefaAtualizada.getDescricao());
+            tarefaExistente.setStatus(tarefaAtualizada.getStatus());
+            tarefaExistente.setPrioridade(tarefaAtualizada.getPrioridade());
+            tarefaExistente.setResponsavel(tarefaAtualizada.getResponsavel());
+            return repository.save(tarefaExistente);
+        });
     }
 
     public List<Tarefa> filtrarPorStatus(String status) {

@@ -1,6 +1,6 @@
 package br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING.controller;
 import br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING.model.Tarefa;
-import br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING.service.ListaTarefas;
+import br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING.service.TarefaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,51 +16,64 @@ import java.util.Optional;
 @Validated
 public class TarefaController {
     @Autowired
-    private ListaTarefas listaTarefas;
+    private TarefaService tarefaService;
 
     @GetMapping
     public ResponseEntity<List<Tarefa>> exibirTarefas(){
-       List<Tarefa> tarefas = listaTarefas.listarTodas();
+       List<Tarefa> tarefas = tarefaService.buscarTodas();
        return ResponseEntity.ok(tarefas);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Tarefa> buscarTarefaPorId(@PathVariable Long id) {
-       Optional<Tarefa> tarefa = listaTarefas.buscarTarefaPorId(id);
+    public ResponseEntity<Tarefa> exibirTarefaPorID(@PathVariable Long id) {
+       Optional<Tarefa> tarefa = tarefaService.buscarTarefaPorId(id);
        return tarefa.map(ResponseEntity::ok)
                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tarefa não encontrada"));
     }
 
+    @GetMapping("/prioridade/{prioridade}")
+    public ResponseEntity<List<Tarefa>> exibirPorPrioridade(@PathVariable int prioridade) {
+       List<Tarefa> tarefaPrioridade = tarefaService.filtrarPorPrioridade(prioridade);
+       if(tarefaPrioridade.isEmpty()){
+          return ResponseEntity.status(HttpStatus.NOT_FOUND).body(tarefaPrioridade);
+       }
+       return ResponseEntity.ok(tarefaPrioridade);
+    }
+
+   @GetMapping("/listar_prioridade")
+   public ResponseEntity<List<Tarefa>> listarOrdenadoPorPrioridade() {
+      List<Tarefa> tarefas = tarefaService.listarOrdenadoPorPrioridade();
+      return ResponseEntity.ok(tarefas);
+   }
+
+   @GetMapping("/status/{status}")
+   public ResponseEntity<List<Tarefa>> exibirPorStatus(@PathVariable String status) {
+      List<Tarefa> tarefaStatus = tarefaService.filtrarPorStatus(status);
+      if(tarefaStatus.isEmpty()){
+         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(tarefaStatus);
+      }
+      return ResponseEntity.ok(tarefaStatus);
+   }
+
     @PostMapping("/")
     public ResponseEntity<Tarefa> criarTarefa(@Validated @RequestBody Tarefa tarefa) {
-       Tarefa novaTarefa = listaTarefas.salvarTarefa(tarefa);
+       Tarefa novaTarefa = tarefaService.salvarTarefa(tarefa);
        return ResponseEntity.status(HttpStatus.CREATED).body(novaTarefa);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Tarefa> atualizarTarefa(@PathVariable Long id, @Validated @RequestBody Tarefa tarefaAtualizada) {
-       return listaTarefas.buscarTarefaPorId(id)
-               .map(tarefa -> {
-                  tarefa.setTitulo(tarefaAtualizada.getTitulo());
-                  tarefa.setDescricao(tarefaAtualizada.getDescricao());
-                  tarefa.setStatus(tarefaAtualizada.getStatus());
-                  tarefa.setPrioridade(tarefaAtualizada.getPrioridade());
-                  tarefa.setResponsavel(tarefaAtualizada.getResponsavel());
-                  Tarefa tarefaAtualizadaSalva = listaTarefas.salvarTarefa(tarefa);
-                  return ResponseEntity.ok(tarefaAtualizadaSalva);
-               })
-               .orElseGet(() -> {
-                  tarefaAtualizada.setId(id);
-                  Tarefa novaTarefa = listaTarefas.salvarTarefa(tarefaAtualizada);
-                  return ResponseEntity.status(HttpStatus.CREATED).body(novaTarefa);
-               });
+       Optional<Tarefa> tarefaAtulizada = tarefaService.atualizarTarefa(id, tarefaAtualizada);
+       return tarefaAtulizada
+               .map(ResponseEntity::ok)
+               .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTarefa(@PathVariable Long id) {
-       Optional<Tarefa> tarefa = listaTarefas.buscarTarefaPorId(id);
+       Optional<Tarefa> tarefa = tarefaService.buscarTarefaPorId(id);
        if (tarefa.isPresent()) {
-          listaTarefas.excluirTarefa(id);
+          tarefaService.excluirTarefa(id);
           return ResponseEntity.noContent().build();
        } else {
           throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tarefa não encontrada");

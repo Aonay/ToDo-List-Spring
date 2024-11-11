@@ -1,5 +1,6 @@
 package br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING.model;
 import jakarta.persistence.*;
+import org.springframework.beans.BeanUtils;
 
 @Entity
 @Table(name="Tarefas")
@@ -18,19 +19,19 @@ public class Tarefa {
     private int prioridade;
 
     @Column(name = "status")
-    private String status = "Pendente";
+    private String status = "pendente";
 
     @Column(name = "responsavel")
     private String responsavel;
 
-    public Tarefa(String titulo, String descricao, int prioridade,  String responsavel) {
+    public Tarefa() {
+    }
+
+    public Tarefa(String titulo, String descricao, int prioridade, String responsavel) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.prioridade = prioridade;
-        this.status = "Pendente";
         this.responsavel = responsavel;
-    }
-    public Tarefa(){
     }
 
     public long getId() {
@@ -41,55 +42,39 @@ public class Tarefa {
         return titulo;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public int getPrioridade() {
-        return prioridade;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public String getResponsavel() {
-        return responsavel;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public String getDescricao() {
+        return descricao;
     }
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
+    public int getPrioridade() {
+        return prioridade;
+    }
+
     public void setPrioridade(int prioridade) {
         this.prioridade = prioridade;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
     public void setStatus(String status) {
-        this.status = status;
+        this.status = "pendente";
+    }
+
+    public String getResponsavel() {
+        return responsavel;
     }
 
     public void setResponsavel(String responsavel) {
         this.responsavel = responsavel;
-    }
-
-    @Override
-    public String toString() {
-        return "Tarefas{" +
-                "id=" + id +
-                ", titulo='" + titulo + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", prioridade=" + prioridade +
-                ", status='" + status + '\'' +
-                ", responsavel='" + responsavel + '\'' +
-                '}';
     }
 }

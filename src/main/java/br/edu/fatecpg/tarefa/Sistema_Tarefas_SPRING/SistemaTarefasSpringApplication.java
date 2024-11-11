@@ -1,5 +1,5 @@
 package br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING;
-import br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING.service.ListaTarefas;
+import br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING.service.TarefaService;
 import br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING.model.Tarefa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class SistemaTarefasSpringApplication implements CommandLineRunner {
 
 	@Autowired
-	private ListaTarefas listaTarefas;
+	private TarefaService tarefaService;
 	private static final Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
@@ -43,7 +43,7 @@ public class SistemaTarefasSpringApplication implements CommandLineRunner {
 			switch (opcao) {
 				case 1 -> adicionarTarefa();
 				case 2 -> exibirTodasAsTarefas();
-				case 3 -> exibirTarefaEspecifica();
+//				case 3 -> exibirTarefaEspecifica();
 				case 4 -> atualizarResponsavel();
 				case 5 -> atualizarStatus();
 				case 6 -> filtrarPorPrioridade();
@@ -74,19 +74,19 @@ public class SistemaTarefasSpringApplication implements CommandLineRunner {
 		String responsavel = scanner.nextLine().toLowerCase();
 
 		Tarefa tarefa = new Tarefa(titulo, descricao, prioridade, responsavel);
-		listaTarefas.salvarTarefa(tarefa);
+		tarefaService.salvarTarefa(tarefa);
 		System.out.println("Tarefa adicionada com sucesso.");
 	}
 
 	private void exibirTodasAsTarefas() {
-		listaTarefas.listarTodas().forEach(System.out::println);
+		tarefaService.buscarTodas().forEach(System.out::println);
 	}
 
-	private void exibirTarefaEspecifica() {
-		System.out.println("Digite o ID da tarefa:");
-		Long id = scanner.nextLong();
-		listaTarefas.exibirTarefa(id);
-	}
+//	private void exibirTarefaEspecifica() {
+//		System.out.println("Digite o ID da tarefa:");
+//		Long id = scanner.nextLong();
+//		tarefaService.exibirTarefa(id);
+//	}
 
 	private void atualizarResponsavel() {
 		System.out.println("Digite o ID da tarefa:");
@@ -96,7 +96,7 @@ public class SistemaTarefasSpringApplication implements CommandLineRunner {
 		System.out.println("Digite o novo responsável:");
 		String novoResponsavel = scanner.nextLine();
 
-		listaTarefas.atualizarResponsavelTarefa(id, novoResponsavel);
+		tarefaService.atualizarResponsavelTarefa(id, novoResponsavel);
 		System.out.println("Responsável atualizado com sucesso.");
 	}
 
@@ -117,13 +117,13 @@ public class SistemaTarefasSpringApplication implements CommandLineRunner {
 		switch(opcao) {
 			case 1:
 				novoStatus = "pendente";
-				listaTarefas.atualizarStatusTarefa(id, novoStatus);
+				tarefaService.atualizarStatusTarefa(id, novoStatus);
 			case 2:
 				novoStatus = "em andamento";
-				listaTarefas.atualizarStatusTarefa(id, novoStatus);
+				tarefaService.atualizarStatusTarefa(id, novoStatus);
 			case 3:
 				novoStatus = "concluído";
-				listaTarefas.atualizarStatusTarefa(id, novoStatus);
+				tarefaService.atualizarStatusTarefa(id, novoStatus);
 		}
 		System.out.println("Status atualizado com sucesso.");
 	}
@@ -131,19 +131,19 @@ public class SistemaTarefasSpringApplication implements CommandLineRunner {
 	private void filtrarPorPrioridade() {
 		System.out.println("Digite a prioridade (1-5):");
 		int prioridade = scanner.nextInt();
-		listaTarefas.filtrarPorPrioridade(prioridade).forEach(System.out::println);
+		tarefaService.filtrarPorPrioridade(prioridade).forEach(System.out::println);
 	}
 
 	private void filtrarPorStatus() {
 		System.out.println("Digite o status para filtrar:");
 		String status = scanner.nextLine();
-		listaTarefas.filtrarPorStatus(status).forEach(System.out::println);
+		tarefaService.filtrarPorStatus(status).forEach(System.out::println);
 	}
 
 	private void excluirTarefaPorId(){
 		System.out.println("Digite o ID da tarefa que deseja excluir: ");
 		Long id = scanner.nextLong();
-		listaTarefas.excluirTarefa(id);
+		tarefaService.excluirTarefa(id);
 		System.out.println("Tarefa excluada com sucesso.");
 
 	}
