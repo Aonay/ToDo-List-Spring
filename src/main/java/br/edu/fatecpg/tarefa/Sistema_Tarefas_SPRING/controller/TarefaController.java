@@ -37,6 +37,31 @@ public class TarefaController {
                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tarefa não encontrada"));
     }
 
+    @PostMapping("/")
+    public ResponseEntity<Tarefa> criarTarefa(@Validated @RequestBody Tarefa tarefa) {
+        Tarefa novaTarefa = tarefaService.salvarTarefa(tarefa);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novaTarefa);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Tarefa> atualizarTarefa(@PathVariable Long id, @Validated @RequestBody Tarefa tarefaAtualizada) {
+        Optional<Tarefa> tarefaAtulizada = tarefaService.atualizarTarefa(id, tarefaAtualizada);
+        return tarefaAtulizada
+                .map(ResponseEntity::ok)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTarefa(@PathVariable Long id) {
+        Optional<Tarefa> tarefa = tarefaService.buscarTarefaPorId(id);
+        if (tarefa.isPresent()) {
+            tarefaService.excluirTarefa(id);
+            return ResponseEntity.noContent().build();
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tarefa não encontrada");
+        }
+    }
+
     @GetMapping("/prioridade/{prioridade}")
     public ResponseEntity<List<Tarefa>> exibirPorPrioridade(@PathVariable int prioridade) {
        List<Tarefa> tarefaPrioridade = tarefaService.filtrarPorPrioridade(prioridade);
@@ -61,30 +86,11 @@ public class TarefaController {
       return ResponseEntity.ok(tarefaStatus);
    }
 
-    @PostMapping("/")
-    public ResponseEntity<Tarefa> criarTarefa(@Validated @RequestBody Tarefa tarefa) {
-       Tarefa novaTarefa = tarefaService.salvarTarefa(tarefa);
-       return ResponseEntity.status(HttpStatus.CREATED).body(novaTarefa);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Tarefa> atualizarTarefa(@PathVariable Long id, @Validated @RequestBody Tarefa tarefaAtualizada) {
-       Optional<Tarefa> tarefaAtulizada = tarefaService.atualizarTarefa(id, tarefaAtualizada);
-       return tarefaAtulizada
-               .map(ResponseEntity::ok)
-               .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTarefa(@PathVariable Long id) {
-       Optional<Tarefa> tarefa = tarefaService.buscarTarefaPorId(id);
-       if (tarefa.isPresent()) {
-          tarefaService.excluirTarefa(id);
-          return ResponseEntity.noContent().build();
-       } else {
-          throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tarefa não encontrada");
-       }
-    }
+   @GetMapping("/ordenar")
+   public ResponseEntity<List<Tarefa>> ordenarPorTitulo(){
+        List<Tarefa> tarefas = tarefaService.ordenarPorTitulo();
+        return ResponseEntity.ok(tarefas);
+   }
 
     @PostMapping("/enviarEmail/{$email}")
     public ResponseEntity<String> enviarEmailCadastro(@RequestParam @Email String email) {

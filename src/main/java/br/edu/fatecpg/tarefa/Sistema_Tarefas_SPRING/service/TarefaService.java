@@ -48,6 +48,10 @@ public class TarefaService {
         return repository.findByResponsavel(responsavel);
     }
 
+    public List<Tarefa> ordenarPorTitulo(){
+        return repository.findAllByOrderByTituloAsc();
+    }
+
     // METODO NATIVO
     public int contarPorStatus(String status) {
         return repository.contarPorStatus(status);

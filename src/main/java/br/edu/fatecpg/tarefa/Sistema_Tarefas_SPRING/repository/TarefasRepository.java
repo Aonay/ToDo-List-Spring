@@ -16,6 +16,7 @@ public interface TarefasRepository extends JpaRepository<Tarefa, Long> {
    List<Tarefa> findByResponsavel(String responsavel);
    List<Tarefa> findByStatus(String status);
    Optional<Tarefa> findById(Long id);
+   List<Tarefa> findAllByOrderByTituloAsc();
 
    //NATIVA
    @Query(value = "SELECT COUNT(*) FROM Tarefas WHERE status = :status", nativeQuery = true)
