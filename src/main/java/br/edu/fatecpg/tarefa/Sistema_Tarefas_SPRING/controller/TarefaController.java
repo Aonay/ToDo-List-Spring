@@ -1,6 +1,9 @@
 package br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING.controller;
 import br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING.model.Tarefa;
+import br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING.service.EmailService;
 import br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING.service.TarefaService;
+import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +20,10 @@ import java.util.Optional;
 public class TarefaController {
     @Autowired
     private TarefaService tarefaService;
+    @Autowired
+    private EmailService emailService;
 
+    @Operation(summary = "Retorna todas as tarefas cadastradas")
     @GetMapping
     public ResponseEntity<List<Tarefa>> exibirTarefas(){
        List<Tarefa> tarefas = tarefaService.buscarTodas();
@@ -78,5 +84,16 @@ public class TarefaController {
        } else {
           throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tarefa não encontrada");
        }
+    }
+
+    @PostMapping("/enviarEmail/{$email}")
+    public ResponseEntity<String> enviarEmailCadastro(@RequestParam @Email String email) {
+        try {
+            emailService.enviarEmail(email, "Bem-vindo!",
+                    "Obrigado por se cadastrar na nossa plataforma.");
+            return ResponseEntity.ok("E-mail enviado com sucesso!");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Ocorreu um erro ao enviar o e-mail.");
+        }
     }
 }
