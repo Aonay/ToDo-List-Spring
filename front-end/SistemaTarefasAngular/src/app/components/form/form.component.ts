@@ -1,17 +1,35 @@
 import { Component, Input } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http'; // Para requisições HTTP
+import { CommonModule } from '@angular/common'; // Para diretivas como *ngIf e *ngFor
+import { FormsModule } from '@angular/forms'; // Para [(ngModel)]
 
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './form.component.html',
-  styleUrl: './form.component.css'
+  styleUrls: ['./form.component.css']
 })
 export class FormComponent {
-  @Input() btnText!: string
+  @Input() btnText: string = "Enviar";
+  email: string = "";
+  senha: string = "";
+
+  private apiUrl = 'http://localhost:8080/usuarios/login';
+
+  constructor(private http: HttpClient) {}
+
+  onSubmit() {
+    this.http.post(this.apiUrl, { email: this.email, senha: this.senha }).subscribe({
+      next: (response) => {
+        alert('Login realizado com sucesso!');
+        console.log(response); //SUCESSOO!!!
+      },
+      error: (err) => {
+        alert('Login inválido');
+        console.error(err); 
+      }
+    });
+  }
   
-  constructor(){ }
-
-
-
 }
