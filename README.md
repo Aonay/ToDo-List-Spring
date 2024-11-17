@@ -1,32 +1,27 @@
-# TODOList - Projeto Spring Boot
+# SistemaTarefasAngular
 
-Aplicação de gerenciamento de tarefas (TODOList) desenvolvida em Java usando Spring Boot, com funcionalidades de CRUD (Create, Read, Update, Delete) e opções de filtro para organização de tarefas.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.12.
 
-## Tecnologias Utilizadas
+## Development server
 
-- **Java**: Linguagem principal do projeto.
-- **Spring Boot**: Framework para desenvolvimento de aplicações Java standalone.
-- **Spring Data JPA**: Abstração para interação com banco de dados.
-- **Hibernate**: Implementação de JPA para mapeamento objeto-relacional.
-- **Console**: Interface simples via terminal para interações do usuário.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Estrutura do Projeto
+## Code scaffolding
 
-- **Classe Principal**: Inicializa o aplicativo e exibe um menu interativo no console para gerenciar tarefas.
-- **Modelo de Dados (`Tarefa`)**: Representa uma tarefa com atributos como título, descrição, prioridade, status e responsável.
-- **Repositório (`TarefasRepository`)**: Interface que lida com persistência de dados, oferecendo métodos de CRUD e filtros específicos.
-- **Serviço (`ListaTarefas`)**: Gerencia a lógica de negócios, conectando o repositório e a interface do usuário para operações como adicionar, atualizar e listar tarefas.
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Princípios e Paradigmas Utilizados
+## Build
 
-- **POO (Programação Orientada a Objeto)**: Estrutura baseada em classes que encapsulam dados e funcionalidades.
-- **Injeção de Dependência**: Reduz acoplamento ao injetar serviços automaticamente com `@Autowired`.
-- **Repository Pattern**: Camada de repositório para abstração e separação entre lógica de negócios e persistência de dados.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Execução do Projeto
+## Running unit tests
 
-1. **Pré-requisitos**: Java 17+ e Maven instalados.
-2. **Compilação e Execução**:
-   ```bash
-   mvn clean install
-   mvn spring-boot:run
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
