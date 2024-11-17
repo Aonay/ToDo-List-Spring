@@ -1,13 +1,14 @@
+<h1>Nosso projeto angular começa aqui!</h1>
+<h3>/login</h3>
+
 <form (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="email">E-mail:</label>
-      <input type="text" [(ngModel)]="email" name="email" placeholder="exemplo@gmail.com" required />
-    </div>
-    <div class="form-group">
-      <label for="senha">Senha:</label>
-      <input type="password" [(ngModel)]="senha" name="senha" placeholder="Digite sua senha" required />
-    </div>
-    <input type="submit" [value]="btnText">
-  </form>
-  
-  
+  <div class="form-group">
+    <label for="email">E-mail:</label>
+    <input type="text" [(ngModel)]="email" name="email" placeholder="exemplo@gmail.com" required />
+  </div>
+  <div class="form-group">
+    <label for="senha">Senha:</label>
+    <input type="password" [(ngModel)]="senha" name="senha" placeholder="Digite sua senha" required />
+  </div>
+  <input type="submit" [value]="btnText">
+</form>
