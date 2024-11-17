@@ -1,12 +1,23 @@
-import { Routes } from '@angular/router';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { FormComponent } from './components/form/form.component';
+import { RouterModule, Routes } from '@angular/router';
+import { FormLoginComponent } from './components/forms/form-login/form-login.component';
+import { FormCadastroComponent } from './components/forms/form-cadastro/form-cadastro.component';
+import { NgModule } from '@angular/core';
+import { HomeComponent } from './components/pages/home/home.component';
+import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: FormComponent },
-  { path: 'dashboard', component: DashboardComponent },
-];
+    { path: '', redirectTo: '/home', pathMatch: 'full' }, //redireciona sempre para /home
 
-// path: 'nomeDoPath', component: EscolherComponenteParaRenderizar
-// Em cada Componente, sera injetado os outros components necessários em tags HTML
+    { path: 'home', component: HomeComponent}, 
+    { path: 'login', component: FormLoginComponent }, 
+    { path: 'cadastro', component: FormCadastroComponent }, 
+    { path: 'dashboard', component: DashboardComponent } 
+
+  ];
+
+  @NgModule({
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule],
+  })
+
+  export class AppRoutes { }
