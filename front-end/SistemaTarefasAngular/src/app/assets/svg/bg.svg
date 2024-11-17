@@ -1,0 +1,33 @@
+<svg id="visual" viewBox="0 0 900 600" width="900" height="600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+  <rect x="0" y="0" width="900" height="600" fill="#000"></rect>
+  
+  <defs>
+    <linearGradient id="animatedGradient" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#B50045">
+        <animate attributeName="stop-color"
+          values="#B50045;#3C055F;#6A6AEC;#060044;#8E043B;#B50045;" dur="20s" repeatCount="indefinite">
+        </animate>
+      </stop>
+      <stop offset="0.5" stop-color="#3C055F">
+        <animate attributeName="stop-color"
+          values="#3C055F;#6A6AEC;#060044;#8E043B;#B50045;#3C055F;" dur="20s" repeatCount="indefinite">
+        </animate>
+      </stop>
+      <stop offset="1" stop-color="#6A6AEC">
+        <animate attributeName="stop-color"
+          values="#6A6AEC;#060044;#8E043B;#B50045;#3C055F;#6A6AEC;" dur="20s" repeatCount="indefinite">
+        </animate>
+      </stop>
+      <animateTransform attributeName="gradientTransform" type="rotate" from="0 .5 .5" to="360 .5 .5"
+        dur="20s" repeatCount="indefinite" />
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(900, 0)">
+    <path d="M0 351.5C-43.3 343.7 -86.6 335.8 -133.2 321.5C-179.7 307.2 -229.5 286.6 -248.6 248.6C-267.6 210.6 -255.9 155.3 -267.9 111C-280 66.7 -315.7 33.3 -351.5 0L0 0Z" fill="url(#animatedGradient)"></path>
+  </g>
+  
+  <g transform="translate(0, 600)">
+    <path d="M0 -351.5C51.1 -351.7 102.2 -351.8 134.5 -324.8C166.9 -297.7 180.4 -243.5 208.6 -208.6C236.8 -173.7 279.5 -158.2 305.8 -126.7C332.1 -95.1 341.8 -47.6 351.5 0L0 0Z" fill="url(#animatedGradient)"></path>
+  </g>
+</svg>

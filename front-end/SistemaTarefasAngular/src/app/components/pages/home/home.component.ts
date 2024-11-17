@@ -6,8 +6,9 @@ import { Router } from '@angular/router'; // Importa o Router para navegação
   standalone: true,
   imports: [],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
+
 export class HomeComponent {
   constructor(private router: Router) {}
 
