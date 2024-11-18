@@ -38,4 +38,9 @@ export class FormLoginComponent {
     });
   }
   
+  closeForm() {
+    // Redireciona para a página inicial
+    this.router.navigate(['/']);
+  }
+
 }

@@ -19,4 +19,6 @@ export class HomeComponent {
   navigateToCadastro() {
     this.router.navigate(['/cadastro']); // Navega para a página de cadastro
   }
+
+  
 }

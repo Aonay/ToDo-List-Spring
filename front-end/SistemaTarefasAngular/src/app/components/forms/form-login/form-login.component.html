@@ -1,16 +1,19 @@
 <main>
-<h1>Faça seu login:</h1>
-
-<form (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="email">E-mail:</label>
-      <input type="text" [(ngModel)]="email" name="email" placeholder="exemplo@gmail.com" required />
+<section>
+  <div class="container">
+    <button class="close-btn" (click)="closeForm()">X</button>
+    <h1>Faça seu login:</h1>
+      <form (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="email">E-mail:</label>
+            <input type="text" [(ngModel)]="email" name="email" placeholder="exemplo@gmail.com" required />
+          </div>
+          <div class="form-group">
+            <label for="senha">Senha:</label>
+            <input type="password" [(ngModel)]="senha" name="senha" placeholder="Digite sua senha" required />
+          </div>
+          <input class="btnEnviar" type="submit" value="Enviar">
+        </form>
     </div>
-    <div class="form-group">
-      <label for="senha">Senha:</label>
-      <input type="password" [(ngModel)]="senha" name="senha" placeholder="Digite sua senha" required />
-    </div>
-    <input type="submit" value="Enviar">
-
-  </form>
+</section>
 </main>

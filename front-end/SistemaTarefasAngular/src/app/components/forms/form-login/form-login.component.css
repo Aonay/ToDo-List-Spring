@@ -5,4 +5,106 @@ main {
     background-repeat: no-repeat;
     background-size: cover;
     color: #ffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.container {
+    position: relative; /* Para o botão de fechar se posicionar corretamente */
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
+    padding: 30px;
+    border-radius: 0px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    text-align: center;
+    border-top: 1px solid #ff00b1;
+    border-right: 2px solid #960772;
+    border-left: 2px solid #b520f8;
+    border-bottom: 2px solid #ff8400;
+    box-shadow: 10px 10px 0px 0px rgba(51, 51, 51, 1);
+
+}
+
+.container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    font-size: 16px;
+    background-color: #f8f8f8;
+}
+
+.btnEnviar {
+    background-color: #ff5e57;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.4s ease;
+    margin-top: 15px;
+}
+
+.btnEnviar:hover {
+    background-color: #7d4cf1;
+}
+
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background: none;
+    border: none;
+    transform: scaleY(0.8);
+    font-weight: 100;
+    color: #fff;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    .container h1 {
+        font-size: 20px;
+    }
+
+    .form-group input {
+        font-size: 14px;
+    }
+
+    .btnEnviar {
+        font-size: 14px;
+    }
+}
+
+

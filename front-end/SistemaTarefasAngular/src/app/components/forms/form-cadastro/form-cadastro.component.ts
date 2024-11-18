@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-cadastro',
@@ -16,7 +17,7 @@ export class FormCadastroComponent {
   senha: string = '';
   private apiUrl = 'http://localhost:8080/usuarios/registrar';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   onSubmit() {
     const userData = {
@@ -35,5 +36,10 @@ export class FormCadastroComponent {
         console.error(error);
       },
     });
+  }
+
+  closeForm() {
+    // Redireciona para a página inicial
+    this.router.navigate(['/']);
   }
 }
