@@ -41,13 +41,13 @@ public class SistemaTarefasSpringApplication implements CommandLineRunner {
 			scanner.nextLine(); // Limpa o buffer do scanner
 
 			switch (opcao) {
-				case 1 -> adicionarTarefa();
-				case 2 -> exibirTodasAsTarefas();
+//				case 1 -> adicionarTarefa();
+//				case 2 -> exibirTodasAsTarefas();
 //				case 3 -> exibirTarefaEspecifica();
 				case 4 -> atualizarResponsavel();
 				case 5 -> atualizarStatus();
-				case 6 -> filtrarPorPrioridade();
-				case 7 -> filtrarPorStatus();
+//				case 6 -> filtrarPorPrioridade();
+//				case 7 -> filtrarPorStatus();
 				case 8 -> excluirTarefaPorId();
 				case 0 -> {
 					System.out.println("Saindo...");
@@ -59,28 +59,28 @@ public class SistemaTarefasSpringApplication implements CommandLineRunner {
 		}
 	}
 
-	private void adicionarTarefa() {
-		System.out.println("Título da tarefa:");
-		String titulo = scanner.nextLine().toLowerCase();
+//	private void adicionarTarefa() {
+//		System.out.println("Título da tarefa:");
+//		String titulo = scanner.nextLine().toLowerCase();
+//
+//		System.out.println("Descrição da tarefa:");
+//		String descricao = scanner.nextLine().toLowerCase();
+//
+//		System.out.println("Prioridade da tarefa (1-5):");
+//		int prioridade = scanner.nextInt();
+//		scanner.nextLine();
+//
+//		System.out.println("Responsável pela tarefa:");
+//		String responsavel = scanner.nextLine().toLowerCase();
+//
+//		Tarefa tarefa = new Tarefa(titulo, descricao, prioridade, responsavel);
+//		tarefaService.salvarTarefa(tarefa);
+//		System.out.println("Tarefa adicionada com sucesso.");
+//	}
 
-		System.out.println("Descrição da tarefa:");
-		String descricao = scanner.nextLine().toLowerCase();
-
-		System.out.println("Prioridade da tarefa (1-5):");
-		int prioridade = scanner.nextInt();
-		scanner.nextLine();
-
-		System.out.println("Responsável pela tarefa:");
-		String responsavel = scanner.nextLine().toLowerCase();
-
-		Tarefa tarefa = new Tarefa(titulo, descricao, prioridade, responsavel);
-		tarefaService.salvarTarefa(tarefa);
-		System.out.println("Tarefa adicionada com sucesso.");
-	}
-
-	private void exibirTodasAsTarefas() {
-		tarefaService.buscarTodas().forEach(System.out::println);
-	}
+//	private void exibirTodasAsTarefas() {
+//		tarefaService.buscarTodas().forEach(System.out::println);
+//	}
 
 //	private void exibirTarefaEspecifica() {
 //		System.out.println("Digite o ID da tarefa:");
@@ -128,17 +128,17 @@ public class SistemaTarefasSpringApplication implements CommandLineRunner {
 		System.out.println("Status atualizado com sucesso.");
 	}
 
-	private void filtrarPorPrioridade() {
-		System.out.println("Digite a prioridade (1-5):");
-		int prioridade = scanner.nextInt();
-		tarefaService.filtrarPorPrioridade(prioridade).forEach(System.out::println);
-	}
+//	private void filtrarPorPrioridade() {
+//		System.out.println("Digite a prioridade (1-5):");
+//		int prioridade = scanner.nextInt();
+//		tarefaService.filtrarPorPrioridade(prioridade).forEach(System.out::println);
+//	}
 
-	private void filtrarPorStatus() {
-		System.out.println("Digite o status para filtrar:");
-		String status = scanner.nextLine();
-		tarefaService.filtrarPorStatus(status).forEach(System.out::println);
-	}
+//	private void filtrarPorStatus() {
+//		System.out.println("Digite o status para filtrar:");
+//		String status = scanner.nextLine();
+//		tarefaService.filtrarPorStatus(status).forEach(System.out::println);
+//	}
 
 	private void excluirTarefaPorId(){
 		System.out.println("Digite o ID da tarefa que deseja excluir: ");

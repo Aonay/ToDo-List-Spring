@@ -1,10 +1,12 @@
 package br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING.service;
 import br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING.model.Tarefa;
+import br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING.model.Usuario;
 import br.edu.fatecpg.tarefa.Sistema_Tarefas_SPRING.repository.TarefasRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -12,21 +14,25 @@ public class TarefaService {
     @Autowired
     private TarefasRepository repository;
 
+    public List<Tarefa> filtrarUsuario(Usuario usuario) {
+        return repository.findByUsuario(usuario);
+    }
+
     public Tarefa salvarTarefa(Tarefa tarefa) {
         return repository.save(tarefa);
     }
 
-    public Optional<Tarefa> buscarTarefaPorId(Long id) {
-        return repository.findById(id);
+    public Optional<Tarefa> buscarTarefaPorIdEUsuario(Long id, Usuario usuario) {
+        return repository.findByIdAndUsuario(id, usuario);
     }
 
-    public List<Tarefa> buscarTodas() {
-        return repository.findAll();
+    public List<Tarefa> buscarTodas(Usuario usuario) {
+        return repository.findByUsuario(usuario);
     }
 
     @Transactional
-    public Optional<Tarefa> atualizarTarefa(Long id, Tarefa tarefaAtualizada) {
-        return buscarTarefaPorId(id).map(tarefaExistente -> {
+    public Optional<Tarefa> atualizarTarefa(Long id, Tarefa tarefaAtualizada, Usuario usuario) {
+        return buscarTarefaPorIdEUsuario(id, usuario).map(tarefaExistente -> {
             tarefaExistente.setTitulo(tarefaAtualizada.getTitulo());
             tarefaExistente.setDescricao(tarefaAtualizada.getDescricao());
             tarefaExistente.setStatus(tarefaAtualizada.getStatus());
@@ -36,16 +42,16 @@ public class TarefaService {
         });
     }
 
-    public List<Tarefa> filtrarPorStatus(String status) {
-        return repository.findByStatus(status);
+    public List<Tarefa> filtrarPorStatus(String status, Usuario usuario) {
+        return repository.findByStatusAndUsuario(status, usuario);
     }
 
-    public List<Tarefa> filtrarPorPrioridade(int prioridade) {
-        return repository.findByPrioridade(prioridade);
+    public List<Tarefa> filtrarPorPrioridade(int prioridade, Usuario usuario) {
+        return repository.findByPrioridadeAndUsuario(prioridade, usuario);
     }
 
-    public List<Tarefa> filtrarPorResponsavel(String responsavel) {
-        return repository.findByResponsavel(responsavel);
+    public List<Tarefa> filtrarPorResponsavel(String responsavel, Usuario usuario) {
+        return repository.findByResponsavelAndUsuario(responsavel, usuario);
     }
 
     public List<Tarefa> ordenarPorTitulo(){
@@ -57,13 +63,16 @@ public class TarefaService {
         return repository.contarPorStatus(status);
     }
 
+    public Map<String, Long> contarTarefasPorStatus(Usuario usuario) {
+        return repository.contarTarefasPorStatus(usuario);
+    }
+
+
     // METODOS JPQL
     public void excluirTarefa(Long id) {
         repository.excluirPorId(id);
     }
-    public List<Tarefa> listarOrdenadoPorPrioridade() {
-        return repository.encontrarPorPrioridade();
-    }
+
     public void atualizarStatusTarefa(Long id, String novoStatus) {
         repository.atualizarStatusPorId(id, novoStatus);
     }

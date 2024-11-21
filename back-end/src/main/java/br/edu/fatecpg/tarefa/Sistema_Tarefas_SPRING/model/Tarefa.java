@@ -24,6 +24,9 @@ public class Tarefa {
     @Column(name = "responsavel")
     private String responsavel;
 
+    @ManyToOne
+    private Usuario usuario;
+
     public Tarefa() {
     }
 
@@ -76,5 +79,9 @@ public class Tarefa {
 
     public void setResponsavel(String responsavel) {
         this.responsavel = responsavel;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
