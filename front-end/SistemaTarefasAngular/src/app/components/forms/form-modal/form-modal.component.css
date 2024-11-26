@@ -1,0 +1,58 @@
+.modal {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 11;
+    background-color: rgba(0, 0, 0, 0.9); /* Fundo semi-transparente */
+    padding: 30px;
+    border-radius: 0px;
+    box-shadow: 10px 10px 0px 0px rgba(51, 51, 51, 1);
+    width: 400px;
+    text-align: center;
+    border-top: 1px solid #ff00b1;
+    border-right: 2px solid #960772;
+    border-left: 2px solid #b520f8;
+    border-bottom: 2px solid #ff8400;
+  }
+  
+  .modal h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    font-size: 16px;
+    background-color: #f8f8f8;
+  }
+  
+  .overlay {
+    background: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: 10;
+  }
+  

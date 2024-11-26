@@ -1,0 +1,12 @@
+<!-- 
+     Vamos controlar (mostrar/esconder)
+     o modal através deste *ngIf
+-->
+<ng-container *ngIf="mostrar">
+    <div class="modal">
+
+     <ng-content> </ng-content>
+
+    </div>
+    <div class="overlay" (click)="fecharModal()"></div>
+  </ng-container>

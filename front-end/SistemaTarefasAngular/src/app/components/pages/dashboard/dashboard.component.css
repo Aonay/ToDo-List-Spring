@@ -1,0 +1,165 @@
+main {
+    width: 100%;
+    height: 100vh; /* Garante que ocupa a altura total da tela */
+    display: flex;
+    flex-direction: column; /* Alinha elementos verticalmente */
+    background-color: #000000;
+    color: #fff;
+  
+
+    .section1 {
+        max-width: 80%;
+        margin-left: 0 auto;
+        padding: 20px;
+
+        .container{
+            top: 5%;
+        }
+
+        .title {
+            font-size: 45px;
+        }
+
+        .frase1 {
+            font-size: 25px;
+        }
+
+        .buttons {
+            
+            gap: 50px;
+            margin-top: 20px;
+
+
+            .btnLogin{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 1;
+                text-decoration: none;
+                color: #ffffff;
+                font-size: 18px;
+                border-radius: 0px;
+                width: 200px;
+                height: 40px;
+                border-top: 1px solid #ff00b1;
+                border-right: 2px solid #960772;
+                border-left: 2px solid #b520f8;
+                border-bottom: 2px solid #ff8400;
+                transition: 0.3s;
+                box-shadow: 5px 5px 0px 0px rgba(51, 51, 51, 1);
+                background-color: #000000;
+                cursor: pointer;
+
+            }
+
+            .btnLogin:hover {
+                box-shadow: 0 0 #333;
+                color: #fff;
+                background-color: #202020;
+            }
+
+
+        }
+    
+        @media (max-width: 1024px) {
+            max-width: 90%;
+            
+            .title {
+                font-size: 40px;
+                margin-bottom: 60px;
+            }
+    
+            .frase1 {
+                font-size: 30px;
+            }
+
+            .frase2 {
+                font-size: 25px;
+            }
+    
+            .buttons {
+                gap: 30px;
+            }
+    
+            .btnLogin, .btnCadastro {
+                padding: 12px;
+            }
+        }
+    
+        @media (max-width: 768px) {
+            max-width: 95%;
+            
+            .title {
+                font-size: 35px;
+                margin-bottom: 50px;
+            }
+    
+            .frase1 {
+                font-size: 25px;
+            }
+
+            .frase2 {
+                font-size: 20px;
+            }
+    
+            .buttons {
+                flex-direction: column;
+                gap: 20px;
+            }
+    
+            .btnLogin, .btnCadastro {
+                padding: 10px;
+            }
+        }
+    
+        @media (max-width: 480px) {
+            max-width: 100%;
+            
+            .title {
+                font-size: 28px;
+                margin-bottom: 30px;
+            }
+    
+            .frase1 {
+                font-size: 20px;
+            }
+
+            .frase2 {
+                font-size: 15px;
+            }
+    
+            .buttons {
+                gap: 15px;
+            }
+    
+            .btnLogin, .btnCadastro {
+                padding: 8px;
+            }
+        }
+        
+    }
+    
+    .colunas {
+        flex: 1; /* Faz com que as colunas ocupem o restante da altura */
+        display: flex; /* Alinha as colunas horizontalmente */
+        gap: 5px; /* Espaço entre as colunas */
+        background-color: rgb(150, 150, 150);
+        padding: 5px;
+      }
+      
+      .coluna {
+        flex: 1; /* Divide o espaço igualmente entre as colunas */
+        background-color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
+        padding: 20px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        overflow-y: auto; /* Permite rolagem vertical */
+        max-height: calc(100vh - 150px); /* Ajusta a altura restante, subtraindo o cabeçalho */
+      }
+      @media (max-width: 768px) {
+        .colunas {
+          flex-direction: column; /* Empilha colunas verticalmente */
+          height: auto; /* Altura ajustável */
+        }
+      }
+}
