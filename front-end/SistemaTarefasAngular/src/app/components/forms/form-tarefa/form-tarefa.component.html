@@ -1,0 +1,81 @@
+<main>
+    <section>
+      <div class="container">
+        <button class="close-btn" (click)="closeForm()">X</button>
+  
+        <h2>Nova Tarefa</h2>
+        <form (ngSubmit)="onSubmit()">
+
+          <div class="form-group">
+            <label for="titulo">Título</label>
+            <input
+              type="text"
+              [(ngModel)]="titulo_tarefa"
+              name="titulo"
+              placeholder="Digite o título"
+              required
+            />
+          </div>
+  
+          <div class="form-group">
+            <label for="descricao">Descrição</label>
+            <input
+              type="text"
+              [(ngModel)]="descricao"
+              name="descricao"
+              placeholder="Digite a descrição"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="descricao">Responsável</label>
+            <input
+              type="text"
+              [(ngModel)]="responsavel"
+              name="responsavel"
+              placeholder="Pessoa responsável"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="prioridade">Prioridade:</label>
+            <div class="rdbtn-group">
+              <label>
+                <input
+                  type="radio"
+                  name="prioridade"
+                  [(ngModel)]="prioridade"
+                  value="Alta"
+                  required
+                />
+                1 Alta
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="prioridade"
+                  [(ngModel)]="prioridade"
+                  value="Média"
+                />
+                2 Média
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="prioridade"
+                  [(ngModel)]="prioridade"
+                  value="Baixa"
+                />
+                3 Baixa
+              </label>
+            </div>
+          </div>
+  
+          <button class="btnEnviar" type="submit">Cadastrar</button>
+        </form>
+      </div>
+    </section>
+  </main>
+  

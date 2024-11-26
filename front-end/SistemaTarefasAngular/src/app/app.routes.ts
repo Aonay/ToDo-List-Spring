@@ -4,6 +4,7 @@ import { FormCadastroComponent } from './components/forms/form-cadastro/form-cad
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './components/pages/home/home.component';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
+import { FormTarefaComponent } from './components/forms/form-tarefa/form-tarefa.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' }, //redireciona sempre para /home
@@ -11,8 +12,8 @@ export const routes: Routes = [
     { path: 'home', component: HomeComponent}, 
     { path: 'login', component: FormLoginComponent }, 
     { path: 'cadastro', component: FormCadastroComponent }, 
-    { path: 'dashboard', component: DashboardComponent } 
-
+    { path: 'dashboard', component: DashboardComponent }, 
+    { path: 'tarefas', component: FormTarefaComponent } 
   ];
 
   @NgModule({
