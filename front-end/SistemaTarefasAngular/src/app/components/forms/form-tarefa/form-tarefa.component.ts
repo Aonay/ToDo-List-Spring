@@ -26,7 +26,14 @@ export class FormTarefaComponent {
   constructor(private http: HttpClient, private router: Router) {}
 
   onSubmit() {
-    const userId = localStorage.getItem('userId')
+    const userId = sessionStorage.getItem('userId');
+    
+    console.log('Título da Tarefa:', this.titulo_tarefa);
+    console.log('Descrição:', this.descricao);
+    console.log('Responsável:', this.responsavel);
+    console.log('Prioridade:', this.prioridade); // Verificando o valor da prioridade
+    console.log('Status:', this.status);
+    console.log('userId:', userId); // Verificando o valor de userId
 
     const tarefa = {
       id: this.id,

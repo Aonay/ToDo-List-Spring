@@ -20,21 +20,21 @@ export class FormLoginComponent {
   constructor(private http: HttpClient, private router: Router) {}
   
   onSubmit() {
-    this.http.post<any>(this.apiUrl, { email: this.email, senha: this.senha }).subscribe({
+    this.http.post<any>(this.apiUrl, { email: this.email, senha: this.senha }, { withCredentials: true } ).subscribe({
       next: (response) => {
-        // Salva o nome e o ID do usuário no localStorage para usar dps
-        localStorage.setItem('userName', response.nome); 
-        localStorage.setItem('userId', response.id);
-  
+        // Salva o nome e o ID do usuário na sessão (sessionStorage)
+        sessionStorage.setItem('userName', response.nome); 
+        sessionStorage.setItem('userId', response.id);
+    
         alert('Login realizado com sucesso!');
-        console.log(response); 
-  
+        console.log(response);
+    
         // Redireciona para o dashboard
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {
         alert('Login inválido');
-        console.error(err); 
+        console.error(err);
       }
     });
   }

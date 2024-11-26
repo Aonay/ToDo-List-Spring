@@ -5,7 +5,7 @@
   
         <h2>Nova Tarefa</h2>
         <form (ngSubmit)="onSubmit()">
-
+  
           <div class="form-group">
             <label for="titulo">Título</label>
             <input
@@ -27,7 +27,7 @@
               required
             />
           </div>
-
+  
           <div class="form-group">
             <label for="descricao">Responsável</label>
             <input
@@ -38,7 +38,7 @@
               required
             />
           </div>
-
+  
           <div class="form-group">
             <label for="prioridade">Prioridade:</label>
             <div class="rdbtn-group">
@@ -47,7 +47,7 @@
                   type="radio"
                   name="prioridade"
                   [(ngModel)]="prioridade"
-                  value="Alta"
+                  value="1"
                   required
                 />
                 1 Alta
@@ -57,7 +57,7 @@
                   type="radio"
                   name="prioridade"
                   [(ngModel)]="prioridade"
-                  value="Média"
+                  value="2"
                 />
                 2 Média
               </label>
@@ -66,7 +66,7 @@
                   type="radio"
                   name="prioridade"
                   [(ngModel)]="prioridade"
-                  value="Baixa"
+                  value="3"
                 />
                 3 Baixa
               </label>

@@ -11,12 +11,13 @@ import { FormTarefaComponent } from '../../forms/form-tarefa/form-tarefa.compone
 })
 export class DashboardComponent implements OnInit {
   nomeUsuario: string | null = '';
+  userId: string | null = '';
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.nomeUsuario = localStorage.getItem('userName');
-    const userId = localStorage.getItem('userId');
+    this.nomeUsuario = sessionStorage.getItem('userName');
+    this.userId = sessionStorage.getItem('userId');
   }
 
   navigateToAddTarefa(): void {
