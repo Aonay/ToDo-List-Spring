@@ -29,7 +29,7 @@
         <div class="coluna">
           <h1>Em Andamento</h1>
           <div *ngFor="let tarefa of emAndamento">
-            <p><strong>Título:</strong> {{ tarefa.titulo_tarefa }}</p>
+            <p><strong>Título:</strong> {{ tarefa.titulo }}</p>
             <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
             <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
           </div>
@@ -38,7 +38,7 @@
         <div class="coluna">
           <h1>Concluídas</h1>
           <div *ngFor="let tarefa of concluidas">
-            <p><strong>Título:</strong> {{ tarefa.titulo_tarefa }}</p>
+            <p><strong>Título:</strong> {{ tarefa.titulo }}</p>
             <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
             <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
           </div>

@@ -59,7 +59,4 @@ export class FormTarefaComponent {
   closeForm() {
     this.router.navigate(['dashboard']);
   }
-
-    
-
 }
