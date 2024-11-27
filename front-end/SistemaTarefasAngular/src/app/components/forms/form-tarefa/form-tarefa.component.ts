@@ -14,11 +14,11 @@ import { Tarefa } from '../../../models/Tarefa';
 })
 export class FormTarefaComponent {
   id: number = 0;
-  titulo_tarefa: string = '';
   descricao: string = '';
   responsavel: string = '';
   prioridade: number = 0;
   status: string = 'pendente';
+  titulo_tarefa: string = '';
   
   private apiUrl = 'http://localhost:8080/tarefas/';
 
@@ -27,13 +27,20 @@ export class FormTarefaComponent {
   onSubmit() {
     const userId = sessionStorage.getItem('userId');
   
+    console.log('Título da Tarefa:', this.titulo_tarefa);
+    console.log('Descrição:', this.descricao);
+    console.log('Responsável:', this.responsavel);
+    console.log('Prioridade:', this.prioridade);
+    console.log('Status:', this.status);
+    console.log('userId:', userId);
+
     const tarefa: Tarefa = {
       id: this.id,
-      titulo_tarefa: this.titulo_tarefa,
       descricao: this.descricao,
       prioridade: this.prioridade,
       status: this.status,
       responsavel: this.responsavel,
+      titulo_tarefa: this.titulo_tarefa,
       usuario_id: userId,  // Adicionando o userId na tarefa
     };
 
@@ -54,11 +61,6 @@ export class FormTarefaComponent {
     this.router.navigate(['dashboard']);
   }
 
-    // console.log('Título da Tarefa:', this.titulo_tarefa);
-    // console.log('Descrição:', this.descricao);
-    // console.log('Responsável:', this.responsavel);
-    // console.log('Prioridade:', this.prioridade);
-    // console.log('Status:', this.status);
-    // console.log('userId:', userId);
+    
 
 }

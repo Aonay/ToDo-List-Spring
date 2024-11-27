@@ -25,7 +25,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.nomeUsuario = sessionStorage.getItem('userName');
     this.userId = sessionStorage.getItem('userId');
-
     this.carregarTarefas();
   }
 
@@ -35,7 +34,7 @@ export class DashboardComponent implements OnInit {
       error: (err) => console.error('Erro ao carregar tarefas pendentes', err),
     });
 
-    this.http.get<any[]>(`${this.apiBaseUrl}/em_andamento`, {withCredentials: true}).subscribe({
+    this.http.get<any[]>(`${this.apiBaseUrl}/em-andamento`, {withCredentials: true}).subscribe({
       next: (data) => (this.emAndamento = data),
       error: (err) => console.error('Erro ao carregar tarefas em andamento', err),
     });
