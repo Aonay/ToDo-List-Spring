@@ -1,6 +1,7 @@
 export interface Tarefa {
+    usuario_id?: string | null;
     id: number;
-    titulo: string;
+    titulo_tarefa: string;
     descricao: string;
     prioridade: number;
     status: string;

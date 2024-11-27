@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common'; // Import necessário
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, HttpClientModule], // Inclua o CommonModule
+  imports: [CommonModule, HttpClientModule], // Importações necessárias
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
@@ -30,19 +30,19 @@ export class DashboardComponent implements OnInit {
   }
 
   carregarTarefas(): void {
-    this.http.get(`${this.apiBaseUrl}/pendentes`).subscribe({
-      next: (data: any) => (this.pendentes = data),
-      error: (err) => console.error('Erro ao carregar pendentes', err),
+    this.http.get<any[]>(`${this.apiBaseUrl}/pendentes`, {withCredentials: true}).subscribe({
+      next: (data) => (this.pendentes = data),
+      error: (err) => console.error('Erro ao carregar tarefas pendentes', err),
     });
 
-    this.http.get(`${this.apiBaseUrl}/em-andamento`).subscribe({
-      next: (data: any) => (this.emAndamento = data),
-      error: (err) => console.error('Erro ao carregar em andamento', err),
+    this.http.get<any[]>(`${this.apiBaseUrl}/em_andamento`, {withCredentials: true}).subscribe({
+      next: (data) => (this.emAndamento = data),
+      error: (err) => console.error('Erro ao carregar tarefas em andamento', err),
     });
 
-    this.http.get(`${this.apiBaseUrl}/concluidas`).subscribe({
-      next: (data: any) => (this.concluidas = data),
-      error: (err) => console.error('Erro ao carregar concluídas', err),
+    this.http.get<any[]>(`${this.apiBaseUrl}/concluidas`, {withCredentials: true}).subscribe({
+      next: (data) => (this.concluidas = data),
+      error: (err) => console.error('Erro ao carregar tarefas concluídas', err),
     });
   }
 
