@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-
 @Component({
   selector: 'app-form-tarefa',
   standalone: true,
@@ -19,7 +18,6 @@ export class FormTarefaComponent {
   responsavel: string = '';
   prioridade: number = 0;
   status: string = 'pendente';
-  
   
   private apiUrl = 'http://localhost:8080/tarefas/';
 
@@ -45,7 +43,7 @@ export class FormTarefaComponent {
       usuario_id: userId,     
     };
 
-    this.http.post(this.apiUrl, tarefa).subscribe({
+    this.http.post(this.apiUrl, tarefa, {withCredentials: true}).subscribe({
       next: (response) => {
         alert('Tarefa criada com sucesso!');
         console.log(response);
