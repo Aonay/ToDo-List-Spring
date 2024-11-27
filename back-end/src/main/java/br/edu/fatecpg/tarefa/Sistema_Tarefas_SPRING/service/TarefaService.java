@@ -30,6 +30,11 @@ public class TarefaService {
         return repository.findByUsuario(usuario);
     }
 
+    public List<Tarefa> buscarPorStatusEUsuario(String status, Usuario usuario) {
+        return repository.findByStatusAndUsuario(status, usuario);
+    }
+
+
     @Transactional
     public Optional<Tarefa> atualizarTarefa(Long id, Tarefa tarefaAtualizada, Usuario usuario) {
         return buscarTarefaPorIdEUsuario(id, usuario).map(tarefaExistente -> {

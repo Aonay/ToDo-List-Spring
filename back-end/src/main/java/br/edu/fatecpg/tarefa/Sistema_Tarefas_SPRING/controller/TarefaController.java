@@ -108,6 +108,37 @@ public class TarefaController {
       return ResponseEntity.ok(tarefaStatus);
    }
 
+   @GetMapping("/status/pendentes")
+   public ResponseEntity<List<Tarefa>> listarPendentes(HttpSession session) {
+      Usuario usuario = (Usuario) session.getAttribute("usuario");
+      if (usuario == null) {
+         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+      }
+      List<Tarefa> pendentes = tarefaService.buscarPorStatusEUsuario("pendente", usuario);
+      return ResponseEntity.ok(pendentes);
+   }
+
+   @GetMapping("/status/em-andamento")
+   public ResponseEntity<List<Tarefa>> listarEmAndamento(HttpSession session) {
+      Usuario usuario = (Usuario) session.getAttribute("usuario");
+      if (usuario == null) {
+         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+      }
+      List<Tarefa> emAndamento = tarefaService.buscarPorStatusEUsuario("andamento", usuario);
+      return ResponseEntity.ok(emAndamento);
+   }
+
+   @GetMapping("/status/concluidas")
+   public ResponseEntity<List<Tarefa>> listarConcluidas(HttpSession session) {
+      Usuario usuario = (Usuario) session.getAttribute("usuario");
+      if (usuario == null) {
+         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+      }
+      List<Tarefa> concluidas = tarefaService.buscarPorStatusEUsuario("concluida", usuario);
+      return ResponseEntity.ok(concluidas);
+   }
+
+
 //   @GetMapping("/status/count")
 //   public ResponseEntity<Map<String, Long>> contarTarefasPorStatus(HttpSession session) {
 //      if (session.getAttribute("usuario") == null) {
