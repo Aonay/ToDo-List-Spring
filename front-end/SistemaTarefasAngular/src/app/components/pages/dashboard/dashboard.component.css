@@ -166,6 +166,24 @@ main {
         /* Permite rolagem vertical */
         max-height: calc(100vh - 150px);
         /* Ajusta a altura restante, subtraindo o cabeçalho */
+
+        .card_pendentes, .card_andamento, .card_concluidas {
+            background-color: #aa0000; /* Cor específica para 'pendentes' */
+            border-radius: 8px; /* Bordas arredondadas */
+            padding: 15px; /* Espaçamento interno */
+            margin-bottom: 10px; /* Espaçamento entre os cards */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para destaque */
+            color: #fff; /* Texto branco */
+        }
+        
+        .card_andamento {
+            background-color: #100192; /* Cor para tarefas em andamento */
+        }
+        
+        .card_concluidas {
+            background-color: #30aa00; /* Cor para tarefas concluídas */
+        }
+
     }
 
     @media (max-width: 768px) {

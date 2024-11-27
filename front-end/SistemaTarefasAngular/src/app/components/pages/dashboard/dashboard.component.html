@@ -19,7 +19,7 @@
       <section class="colunas">
         <div class="coluna">
           <h1>Pendentes</h1>
-          <div *ngFor="let tarefa of pendentes">
+          <div class="card_pendentes" *ngFor="let tarefa of pendentes">
             <p><strong>Título:</strong> {{ tarefa.titulo }}</p>
             <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
             <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
@@ -28,7 +28,7 @@
       
         <div class="coluna">
           <h1>Em Andamento</h1>
-          <div *ngFor="let tarefa of emAndamento">
+          <div class="card_andamento" *ngFor="let tarefa of emAndamento">
             <p><strong>Título:</strong> {{ tarefa.titulo }}</p>
             <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
             <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
@@ -37,7 +37,7 @@
       
         <div class="coluna">
           <h1>Concluídas</h1>
-          <div *ngFor="let tarefa of concluidas">
+          <div class="card_concluidas" *ngFor="let tarefa of concluidas">
             <p><strong>Título:</strong> {{ tarefa.titulo }}</p>
             <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
             <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
