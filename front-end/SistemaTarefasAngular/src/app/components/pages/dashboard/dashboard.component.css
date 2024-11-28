@@ -170,8 +170,7 @@ main {
         .card_pendentes,
         .card_andamento,
         .card_concluidas {
-            display: flex;
-          background-color: #f85050;
+          background-color: #f8507a;
           padding: 1rem;
           margin: 0.5rem 0;
           border-radius: 8px;

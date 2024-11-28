@@ -1,86 +1,90 @@
 <main>
-  <header>
-      
-  </header>
-      <section class="section1">
-          <div class="container">
-              <div class="title">
-                  <h1>Olá, {{ nomeUsuario }}.</h1>
-              </div>
-              <div class="frase1">
-                  <h2>Seja bem vindo ao IntelliTASK.</h2>
-                  <div class="buttons">
-                    <button class="btnLogin" (click)="navigateToAddTarefa()" >Adicionar Tarefa</button>
-                </div>
-              </div>
-          </div>
-      </section>
+  <header></header>
+  <section class="section1">
+    <div class="container">
+      <div class="title">
+        <h1>Olá, {{ nomeUsuario }}.</h1>
+      </div>
+      <div class="frase1">
+        <h2>Seja bem vindo ao IntelliTASK.</h2>
+        <div class="buttons">
+          <button class="btnLogin" (click)="navigateToAddTarefa()">Adicionar Tarefa</button>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      <section class="colunas">
-        <!-- Pendentes -->
-        <div
-          class="coluna"
-          cdkDropList
-          [cdkDropListData]="pendentes"
-          (cdkDropListDropped)="onDrop($event)"
-        >
-          <h1>Pendentes</h1>
-          <div
-            *ngFor="let tarefa of pendentes"
-            class="card_pendentes"
-            cdkDrag
-          >
-            <div class="card_content">
-              <p><strong>Título:</strong> {{ tarefa.titulo }}</p>
-              <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
-              <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
-            </div>
-          </div>
+  <section class="colunas">
+    <!-- Pendentes -->
+    <div
+      class="coluna"
+      id="pendentes"
+      cdkDropList
+      #pendentesList="cdkDropList"
+      [cdkDropListData]="pendentes"
+      [cdkDropListConnectedTo]="[andamentoList, concluidasList]"
+      (cdkDropListDropped)="onDrop($event)"
+    >
+      <h1>Pendentes</h1>
+      <div
+        *ngFor="let tarefa of pendentes"
+        class="card_pendentes"
+        cdkDrag
+      >
+        <div class="card_content">
+          <p><strong>Título:</strong> {{ tarefa.titulo }}</p>
+          <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
+          <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
         </div>
-      
-        <!-- Em Andamento -->
-        <div
-          class="coluna"
-          cdkDropList
-          [cdkDropListData]="andamento"
-          (cdkDropListDropped)="onDrop($event)"
-        >
-          <h1>Em Andamento</h1>
-          <div
-            *ngFor="let tarefa of andamento"
-            class="card_andamento"
-            cdkDrag
-          >
-            <div class="card_content">
-              <p><strong>Título:</strong> {{ tarefa.titulo }}</p>
-              <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
-              <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
-            </div>
-          </div>
+      </div>
+    </div>
+
+    <!-- Em Andamento -->
+    <div
+      class="coluna"
+      id="andamento"
+      cdkDropList
+      #andamentoList="cdkDropList"
+      [cdkDropListData]="andamento"
+      [cdkDropListConnectedTo]="[pendentesList, concluidasList]"
+      (cdkDropListDropped)="onDrop($event)"
+    >
+      <h1>Em Andamento</h1>
+      <div
+        *ngFor="let tarefa of andamento"
+        class="card_andamento"
+        cdkDrag
+      >
+        <div class="card_content">
+          <p><strong>Título:</strong> {{ tarefa.titulo }}</p>
+          <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
+          <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
         </div>
-      
-        <!-- Concluídas -->
-        <div
-          class="coluna"
-          cdkDropList
-          [cdkDropListData]="concluidas"
-          (cdkDropListDropped)="onDrop($event)"
-        >
-          <h1>Concluídas</h1>
-          <div
-            *ngFor="let tarefa of concluidas"
-            class="card_concluidas"
-            cdkDrag
-          >
-            <div class="card_content">
-              <p><strong>Título:</strong> {{ tarefa.titulo }}</p>
-              <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
-              <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
-            </div>
-          </div>
+      </div>
+    </div>
+
+    <!-- Concluídas -->
+    <div
+      class="coluna"
+      id="concluidas"
+      cdkDropList
+      #concluidasList="cdkDropList"
+      [cdkDropListData]="concluidas"
+      [cdkDropListConnectedTo]="[pendentesList, andamentoList]"
+      (cdkDropListDropped)="onDrop($event)"
+    >
+      <h1>Concluídas</h1>
+      <div
+        *ngFor="let tarefa of concluidas"
+        class="card_concluidas"
+        cdkDrag
+      >
+        <div class="card_content">
+          <p><strong>Título:</strong> {{ tarefa.titulo }}</p>
+          <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
+          <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
         </div>
-      </section>
-      
-      
-      
-  </main>
+      </div>
+    </div>
+  </section>
+</main>
