@@ -17,83 +17,70 @@
       </section>
 
       <section class="colunas">
-        <div class="coluna">
+        <!-- Pendentes -->
+        <div
+          class="coluna"
+          cdkDropList
+          [cdkDropListData]="pendentes"
+          (cdkDropListDropped)="onDrop($event)"
+        >
           <h1>Pendentes</h1>
-          <div class="card_pendentes" *ngFor="let tarefa of pendentes">
-            <p><strong>Título:</strong> {{ tarefa.titulo }}</p>
-            <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
-            <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
+          <div
+            *ngFor="let tarefa of pendentes"
+            class="card_pendentes"
+            cdkDrag
+          >
+            <div class="card_content">
+              <p><strong>Título:</strong> {{ tarefa.titulo }}</p>
+              <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
+              <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
+            </div>
           </div>
         </div>
       
-        <div class="coluna">
+        <!-- Em Andamento -->
+        <div
+          class="coluna"
+          cdkDropList
+          [cdkDropListData]="andamento"
+          (cdkDropListDropped)="onDrop($event)"
+        >
           <h1>Em Andamento</h1>
-          <div class="card_andamento" *ngFor="let tarefa of emAndamento">
-            <p><strong>Título:</strong> {{ tarefa.titulo }}</p>
-            <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
-            <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
+          <div
+            *ngFor="let tarefa of andamento"
+            class="card_andamento"
+            cdkDrag
+          >
+            <div class="card_content">
+              <p><strong>Título:</strong> {{ tarefa.titulo }}</p>
+              <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
+              <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
+            </div>
           </div>
         </div>
       
-        <div class="coluna">
+        <!-- Concluídas -->
+        <div
+          class="coluna"
+          cdkDropList
+          [cdkDropListData]="concluidas"
+          (cdkDropListDropped)="onDrop($event)"
+        >
           <h1>Concluídas</h1>
-          <div class="card_concluidas" *ngFor="let tarefa of concluidas">
-            <p><strong>Título:</strong> {{ tarefa.titulo }}</p>
-            <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
-            <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
+          <div
+            *ngFor="let tarefa of concluidas"
+            class="card_concluidas"
+            cdkDrag
+          >
+            <div class="card_content">
+              <p><strong>Título:</strong> {{ tarefa.titulo }}</p>
+              <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
+              <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
+            </div>
           </div>
         </div>
       </section>
       
       
-      <footer>
-  
-      </footer>
-  
-  <!-- Modal
-  <app-form-modal [mostrar]="mostrarModal" (toggle)="toggleModal()">
-    <div class="container">
-    <form>
-      <div class="form-group">
-        <h1>Nova Tarefa</h1>
-        <label for="nome">Título:</label>
-        <input type="text"  name="titulo" required />
-      </div>
-      <div class="form-group">
-        <label for="prioridade">Prioridade:</label>
-        <div>
-          <label>
-            <input type="radio" name="prioridade" value="Alta" required />
-            1 - Alta
-          </label>
-        </div>
-        <div>
-          <label>
-            <input type="radio" name="prioridade" value="Média" />
-            2 - Média
-          </label>
-        </div>
-        <div>
-          <label>
-            <input type="radio" name="prioridade" value="Baixa" />
-            3 - Baixa
-          </label>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="descricao">Descrição:</label>
-        <textarea 
-          id="descricao" 
-          name="descricao" 
-          placeholder="Digite a descrição da tarefa" 
-          required
-          rows="4"
-          cols="50">
-        </textarea>
-      </div>
-      <button class="btnEnviar" type="submit">Cadastrar</button>
-    </form>
-  </div>
-  </app-form-modal> -->
-
+      
   </main>

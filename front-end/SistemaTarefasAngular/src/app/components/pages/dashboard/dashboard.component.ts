@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop'; //drag and drop
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, HttpClientModule], // Importações necessárias
+  imports: [CommonModule, HttpClientModule, DragDropModule], // Importações necessárias
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
@@ -15,7 +17,7 @@ export class DashboardComponent implements OnInit {
   userId: string | null = '';
 
   pendentes: any[] = [];
-  emAndamento: any[] = [];
+  andamento: any[] = [];
   concluidas: any[] = [];
 
   private apiBaseUrl = 'http://localhost:8080/tarefas/status';
@@ -35,7 +37,7 @@ export class DashboardComponent implements OnInit {
     });
 
     this.http.get<any[]>(`${this.apiBaseUrl}/em-andamento`, {withCredentials: true}).subscribe({
-      next: (data) => (this.emAndamento = data),
+      next: (data) => (this.andamento = data),
       error: (err) => console.error('Erro ao carregar tarefas em andamento', err),
     });
 
@@ -47,5 +49,46 @@ export class DashboardComponent implements OnInit {
 
   navigateToAddTarefa(): void {
     this.router.navigate(['/tarefas']);
+  }
+
+  onDrop(event: CdkDragDrop<any[]>): void {
+    if (event.previousContainer === event.container) {
+      // Reordena tarefas dentro da mesma coluna
+      const items = [...event.container.data];
+      items.splice(event.currentIndex, 0, items.splice(event.previousIndex, 1)[0]);
+      event.container.data = items;
+    } else {
+      // Move a tarefa para outra coluna
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    
+      // Lógica para atualizar no backend, se necessário
+      const tarefaMovida = event.container.data[event.currentIndex];
+      console.log('Tarefa Movida:', tarefaMovida);
+  
+      // Atualizando o status da tarefa no backend
+      this.atualizarStatusTarefa(tarefaMovida);
+    }
+  }
+
+  // Função para atualizar o status da tarefa no backend
+  atualizarStatusTarefa(tarefa: any): void {
+    const url = `http://localhost:8080/tarefas/status/concluidas`;
+    const status = tarefa.status; // Assumindo que o status da tarefa está na variável tarefa.status
+  
+    this.http
+      .put(url, { status: status }, { withCredentials: true })
+      .subscribe({
+        next: (data) => {
+          console.log('Status da tarefa atualizado com sucesso:', data);
+        },
+        error: (err) => {
+          console.error('Erro ao atualizar status da tarefa:', err);
+        },
+      });
   }
 }
