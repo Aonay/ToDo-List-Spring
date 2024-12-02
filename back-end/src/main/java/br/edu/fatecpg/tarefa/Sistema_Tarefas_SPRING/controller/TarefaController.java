@@ -21,7 +21,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/tarefas")
 @Validated
-@CrossOrigin(origins = "*", allowedHeaders = "*", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:4200/")
+//@CrossOrigin(origins = "*")
 public class TarefaController {
     @Autowired
     private TarefaService tarefaService;
