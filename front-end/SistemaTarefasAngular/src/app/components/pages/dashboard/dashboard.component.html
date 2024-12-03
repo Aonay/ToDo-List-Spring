@@ -48,6 +48,8 @@
           <p><strong>Título:</strong> {{ tarefa.titulo }}</p>
           <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
           <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
+          <a (click)="excluirTarefa(tarefa.id)">Excluir</a>
+
         </div>
       </div>
     </div>
@@ -72,6 +74,8 @@
           <p><strong>Título:</strong> {{ tarefa.titulo }}</p>
           <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
           <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
+          <a (click)="excluirTarefa(tarefa.id)">Excluir</a>
+
         </div>
       </div>
     </div>
@@ -96,6 +100,7 @@
           <p><strong>Título:</strong> {{ tarefa.titulo }}</p>
           <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
           <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
+          <a (click)="excluirTarefa(tarefa.id)">Excluir</a>
         </div>
       </div>
     </div>
