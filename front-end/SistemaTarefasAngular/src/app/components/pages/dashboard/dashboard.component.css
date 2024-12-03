@@ -169,6 +169,7 @@ main {
 
         .card_pendentes {
             background-color: #f8507a;
+            border-left: solid #007bff;
             padding: 1rem;
             margin: 0.5rem 0;
             border-radius: 8px;

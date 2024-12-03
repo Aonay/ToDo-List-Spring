@@ -118,26 +118,61 @@ export class DashboardComponent implements OnInit {
 
       // Atualiza o status da tarefa no backend
       this.atualizarStatusTarefa(tarefaMovida, novoStatus);
+      this
     }
   }
 
   atualizarStatusTarefa(tarefa: any, novoStatus: string): void {
     const url = `http://localhost:8080/tarefas/${tarefa.id}`;
-
+  
     // Atualiza apenas o campo de status no backend
     const payload = {
       ...tarefa,
       status: novoStatus,
     };
     console.log('Payload enviado ao backend:', payload);
-
+  
     this.http.put(url, payload, { withCredentials: true }).subscribe({
       next: (data: any) => {
         console.log('Status da tarefa atualizado com sucesso:', data);
+  
+        // Atualiza o status localmente no frontend
+        tarefa.status = novoStatus;
+  
+        // Atualiza a exibição das listas
+        this.sincronizarListas();
       },
       error: (err) => {
         console.error('Erro ao atualizar status da tarefa:', err);
       },
     });
   }
+
+  sincronizarListas(): void {
+    this.tarefasFiltradas.pendentes = this.pendentes.filter((tarefa) => tarefa.status === 'pendente');
+    this.tarefasFiltradas.andamento = this.andamento.filter((tarefa) => tarefa.status === 'andamento');
+    this.tarefasFiltradas.concluidas = this.concluidas.filter((tarefa) => tarefa.status === 'concluida');
+  
+    // Atualiza as listas principais também
+    this.pendentes = this.tarefasFiltradas.pendentes;
+    this.andamento = this.tarefasFiltradas.andamento;
+    this.concluidas = this.tarefasFiltradas.concluidas;
+  }
+  
+  excluirTarefa(tarefaId: number): void {
+    if (confirm('Tem certeza de que deseja excluir esta tarefa?')) {
+      const url = `http://localhost:8080/tarefas/${tarefaId}`;
+      this.http.delete(url, { withCredentials: true }).subscribe({
+        next: () => {
+          console.log('Tarefa excluída com sucesso');
+          this.carregarTarefas(); // Recarregar as tarefas após exclusão
+        },
+        error: (err) => {
+          console.error('Erro ao excluir tarefa:', err);
+          alert('Não foi possível excluir a tarefa. Tente novamente.');
+        },
+      });
+    }
+  }
+  
 }
