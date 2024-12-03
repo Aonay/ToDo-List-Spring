@@ -51,25 +51,6 @@ public class TarefaController {
        return ResponseEntity.status(HttpStatus.CREATED).body(novaTarefa);
     }
 
-//   @PutMapping("/{id}")
-//   public ResponseEntity<Tarefa> atualizarTarefa(@PathVariable Long id, @Validated @RequestBody Tarefa tarefaAtualizada, HttpSession session) {
-//      Usuario usuario = (Usuario) session.getAttribute("usuario");
-//      if (usuario == null) {
-//         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-//      }
-//      Optional<Tarefa> tarefaExistenteOpt = tarefaService.buscarTarefaPorIdEUsuario(id, usuario);
-//      if (tarefaExistenteOpt.isEmpty()) {
-//         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tarefa não encontrada ou não pertence a você.");
-//      }
-//      Tarefa tarefaExistente = tarefaExistenteOpt.get();
-//      tarefaExistente.setStatus(tarefaAtualizada.getStatus());
-//      tarefaExistente.setDescricao(tarefaAtualizada.getDescricao());
-//      tarefaExistente.setPrioridade(tarefaAtualizada.getPrioridade());
-//      Tarefa tarefaSalva = tarefaService.salvarTarefa(tarefaExistente);
-//
-//      return ResponseEntity.ok(tarefaSalva);
-//   }
-
    @PutMapping("/{id}")
    public ResponseEntity<Tarefa> atualizarTarefa(@PathVariable Long id, @Validated @RequestBody Tarefa tarefaAtualizada, HttpSession session) {
       Usuario usuario = (Usuario) session.getAttribute("usuario");
@@ -159,15 +140,15 @@ public class TarefaController {
    }
 
 
-//   @GetMapping("/status/count")
-//   public ResponseEntity<Map<String, Long>> contarTarefasPorStatus(HttpSession session) {
-//      if (session.getAttribute("usuario") == null) {
-//         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-//      }
-//      Usuario usuario = (Usuario) session.getAttribute("usuario");
-//      Map<String, Long> tarefas = tarefaService.contarTarefasPorStatus(usuario);
-//      return ResponseEntity.ok(tarefas);
-//   }
+   @GetMapping("/status/count")
+   public ResponseEntity<Map<String, Long>> contarTarefasPorStatus(HttpSession session) {
+      if (session.getAttribute("usuario") == null) {
+         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+      }
+      Usuario usuario = (Usuario) session.getAttribute("usuario");
+      Map<String, Long> tarefas = tarefaService.contarTarefasPorStatus(usuario);
+      return ResponseEntity.ok(tarefas);
+   }
 
    @GetMapping("/ordenar")
    public ResponseEntity<List<Tarefa>> ordenarPorTitulo(HttpSession session) {
@@ -177,6 +158,38 @@ public class TarefaController {
       }
       List<Tarefa> tarefas = tarefaService.ordenarPorTitulo();
       return ResponseEntity.ok(tarefas);
+   }
+
+   @PatchMapping("/{id}/responsavel")
+   public ResponseEntity<Tarefa> atualizarResponsavel(@PathVariable Long id, @RequestBody Map<String, String> atualizacao, HttpSession session) {
+      // Verifica se o usuário está autenticado na sessão
+      Usuario usuario = (Usuario) session.getAttribute("usuario");
+      if (usuario == null) {
+         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+      }
+
+      Optional<Tarefa> tarefaExistente = tarefaService.buscarTarefaPorIdEUsuario(id, usuario);
+
+      if (tarefaExistente.isPresent()) {
+         Tarefa tarefa = tarefaExistente.get();
+         String novoResponsavel = atualizacao.get("responsavel");
+
+         // Verifica se o "responsavel" foi informado
+         if (novoResponsavel == null || novoResponsavel.trim().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+         }
+
+         // Atualiza o responsável na tarefa
+         tarefa.setResponsavel(novoResponsavel);
+
+         // Atualiza a tarefa com o novo responsável
+         Tarefa tarefaAtualizada = tarefaService.salvarTarefa(tarefa);
+
+         return ResponseEntity.ok(tarefaAtualizada);
+      } else {
+         // Caso não encontre a tarefa ou ela não pertença ao usuário
+         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tarefa não encontrada ou não pertence a você.");
+      }
    }
 
    @PostMapping("/enviarEmail/{email}")
