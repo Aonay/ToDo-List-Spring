@@ -31,7 +31,6 @@ public interface TarefasRepository extends JpaRepository<Tarefa, Long> {
 //   @Query("SELECT t.status, COUNT(t) FROM Tarefa t WHERE t.status IN ('pendente', 'em andamento', 'concluída') GROUP BY t.status")
 //   List<Object[]> contarTarefasPorStatus();
 
-
    //JQPL
    @Query("SELECT t FROM Tarefa t ORDER BY t.prioridade ASC")
    List<Tarefa> encontrarPorPrioridade();

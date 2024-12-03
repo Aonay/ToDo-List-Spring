@@ -96,6 +96,20 @@ public class TarefaController {
       return ResponseEntity.ok(tarefaPrioridade);
    }
 
+   @GetMapping("/responsavel/{responsavel}")
+   public ResponseEntity<List<Tarefa>> filtrarPorResponsavel(@PathVariable String responsavel, HttpSession session) {
+      Usuario usuario = (Usuario) session.getAttribute("usuario");
+      if (usuario == null) {
+         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+      }
+      List<Tarefa> tarefaPrioridade = tarefaService.filtrarPorResponsavel(responsavel, usuario);
+      if (tarefaPrioridade.isEmpty()) {
+         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(tarefaPrioridade);
+      }
+
+      return ResponseEntity.ok(tarefaPrioridade);
+   }
+
    @GetMapping("/status/{status}")
    public ResponseEntity<List<Tarefa>> exibirPorStatus(@PathVariable String status, HttpSession session) {
       Usuario usuario = (Usuario) session.getAttribute("usuario");
@@ -139,7 +153,6 @@ public class TarefaController {
       return ResponseEntity.ok(concluidas);
    }
 
-
    @GetMapping("/status/count")
    public ResponseEntity<Map<String, Long>> contarTarefasPorStatus(HttpSession session) {
       if (session.getAttribute("usuario") == null) {
@@ -167,28 +180,20 @@ public class TarefaController {
       if (usuario == null) {
          return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
       }
-
       Optional<Tarefa> tarefaExistente = tarefaService.buscarTarefaPorIdEUsuario(id, usuario);
 
       if (tarefaExistente.isPresent()) {
          Tarefa tarefa = tarefaExistente.get();
          String novoResponsavel = atualizacao.get("responsavel");
 
-         // Verifica se o "responsavel" foi informado
          if (novoResponsavel == null || novoResponsavel.trim().isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
          }
-
-         // Atualiza o responsável na tarefa
          tarefa.setResponsavel(novoResponsavel);
-
-         // Atualiza a tarefa com o novo responsável
          Tarefa tarefaAtualizada = tarefaService.salvarTarefa(tarefa);
-
          return ResponseEntity.ok(tarefaAtualizada);
       } else {
-         // Caso não encontre a tarefa ou ela não pertença ao usuário
-         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tarefa não encontrada ou não pertence a você.");
+         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tarefa não encontrada");
       }
    }
 
