@@ -70,7 +70,7 @@ public class Tarefa {
     }
 
     public void setStatus(String status) {
-        this.status = "pendente";
+        this.status = status;
     }
 
     public String getResponsavel() {

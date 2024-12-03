@@ -51,6 +51,25 @@ public class TarefaController {
        return ResponseEntity.status(HttpStatus.CREATED).body(novaTarefa);
     }
 
+//   @PutMapping("/{id}")
+//   public ResponseEntity<Tarefa> atualizarTarefa(@PathVariable Long id, @Validated @RequestBody Tarefa tarefaAtualizada, HttpSession session) {
+//      Usuario usuario = (Usuario) session.getAttribute("usuario");
+//      if (usuario == null) {
+//         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+//      }
+//      Optional<Tarefa> tarefaExistenteOpt = tarefaService.buscarTarefaPorIdEUsuario(id, usuario);
+//      if (tarefaExistenteOpt.isEmpty()) {
+//         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tarefa não encontrada ou não pertence a você.");
+//      }
+//      Tarefa tarefaExistente = tarefaExistenteOpt.get();
+//      tarefaExistente.setStatus(tarefaAtualizada.getStatus());
+//      tarefaExistente.setDescricao(tarefaAtualizada.getDescricao());
+//      tarefaExistente.setPrioridade(tarefaAtualizada.getPrioridade());
+//      Tarefa tarefaSalva = tarefaService.salvarTarefa(tarefaExistente);
+//
+//      return ResponseEntity.ok(tarefaSalva);
+//   }
+
    @PutMapping("/{id}")
    public ResponseEntity<Tarefa> atualizarTarefa(@PathVariable Long id, @Validated @RequestBody Tarefa tarefaAtualizada, HttpSession session) {
       Usuario usuario = (Usuario) session.getAttribute("usuario");

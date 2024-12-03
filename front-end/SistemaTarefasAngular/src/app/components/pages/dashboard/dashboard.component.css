@@ -167,38 +167,55 @@ main {
         max-height: calc(100vh - 150px);
         /* Ajusta a altura restante, subtraindo o cabeçalho */
 
-        .card_pendentes,
-        .card_andamento,
-        .card_concluidas {
-          background-color: #f8507a;
-          padding: 1rem;
-          margin: 0.5rem 0;
-          border-radius: 8px;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          cursor: grab; /* Indica que o item pode ser arrastado */
+        .card_pendentes {
+            background-color: #f8507a;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: grab;
         }
-        
+
+        .card_andamento {
+            background-color: #ffec1d;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: grab;
+        }
+
+        .card_concluidas {
+            background-color: #45b11a;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: grab;
+        }
+
         .card_pendentes.cdk-drag-preview,
         .card_andamento.cdk-drag-preview,
         .card_concluidas.cdk-drag-preview {
-          background-color: #0d0049; /* Cor alterada durante o arrasto */
-          box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-          color: #f85050;
+            background-color: #0d0049;
+            /* Cor alterada durante o arrasto */
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+            color: #f85050;
         }
-        
+
         .card_pendentes:hover,
         .card_andamento:hover,
         .card_concluidas:hover {
-          transform: scale(1.05);
-          transition: transform 0.2s ease;
+            transform: scale(1.05);
+            transition: transform 0.2s ease;
         }
-        
+
         /* Garantir que o texto dentro do card seja legível */
         .card_content {
-          display: flex;
-          flex-direction: column;
+            display: flex;
+            flex-direction: column;
         }
-        
+
 
     }
 
@@ -210,4 +227,34 @@ main {
             /* Altura ajustável */
         }
     }
+
+    .filtro-prioridade {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .filtro-prioridade select {
+        padding: 5px;
+        font-size: 16px;
+    }
+
+    .filtro-prioridade button {
+        padding: 5px 10px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .filtro-prioridade button:hover {
+        background-color: #0056b3;
+    }
+
+
+
 }

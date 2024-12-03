@@ -12,6 +12,19 @@
         </div>
       </div>
     </div>
+
+    <div class="filtro-prioridade">
+      <label for="prioridade">Filtrar por Prioridade:</label>
+      <select id="prioridade" [(ngModel)]="prioridadeSelecionada">
+        <option value="">Todas</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+      <button (click)="aplicarFiltro()">Aplicar Filtro</button>
+    </div>
+    
+    
   </section>
 
   <section class="colunas">
@@ -27,7 +40,7 @@
     >
       <h1>Pendentes</h1>
       <div
-        *ngFor="let tarefa of pendentes"
+        *ngFor="let tarefa of tarefasFiltradas.pendentes"
         class="card_pendentes"
         cdkDrag
       >
@@ -51,7 +64,7 @@
     >
       <h1>Em Andamento</h1>
       <div
-        *ngFor="let tarefa of andamento"
+        *ngFor="let tarefa of tarefasFiltradas.andamento"
         class="card_andamento"
         cdkDrag
       >
@@ -75,7 +88,7 @@
     >
       <h1>Concluídas</h1>
       <div
-        *ngFor="let tarefa of concluidas"
+        *ngFor="let tarefa of tarefasFiltradas.concluidas"
         class="card_concluidas"
         cdkDrag
       >

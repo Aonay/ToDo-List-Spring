@@ -4,11 +4,12 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, transferArrayItem, moveItemInArray } from '@angular/cdk/drag-drop'; // Drag and drop
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, DragDropModule], // Importações necessárias
+  imports: [CommonModule, HttpClientModule, DragDropModule, FormsModule], // Importações necessárias
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
@@ -19,6 +20,13 @@ export class DashboardComponent implements OnInit {
   pendentes: any[] = [];
   andamento: any[] = [];
   concluidas: any[] = [];
+
+  prioridadeSelecionada: string = ''; // Armazena o filtro de prioridade
+  tarefasFiltradas: {
+    pendentes: any[];
+    andamento: any[];
+    concluidas: any[];
+  } = { pendentes: [], andamento: [], concluidas: [] }; // Tarefas filtradas por prioridade
 
   private apiBaseUrl = 'http://localhost:8080/tarefas/status';
 
@@ -32,19 +40,49 @@ export class DashboardComponent implements OnInit {
 
   carregarTarefas(): void {
     this.http.get<any[]>(`${this.apiBaseUrl}/pendentes`, { withCredentials: true }).subscribe({
-      next: (data) => (this.pendentes = data),
+      next: (data) => {
+        this.pendentes = data;
+        this.tarefasFiltradas.pendentes = [...this.pendentes];
+      },
       error: (err) => console.error('Erro ao carregar tarefas pendentes', err),
     });
 
     this.http.get<any[]>(`${this.apiBaseUrl}/em-andamento`, { withCredentials: true }).subscribe({
-      next: (data) => (this.andamento = data),
+      next: (data) => {
+        this.andamento = data;
+        this.tarefasFiltradas.andamento = [...this.andamento];
+      },
       error: (err) => console.error('Erro ao carregar tarefas em andamento', err),
     });
 
     this.http.get<any[]>(`${this.apiBaseUrl}/concluidas`, { withCredentials: true }).subscribe({
-      next: (data) => (this.concluidas = data),
+      next: (data) => {
+        this.concluidas = data;
+        this.tarefasFiltradas.concluidas = [...this.concluidas];
+      },
       error: (err) => console.error('Erro ao carregar tarefas concluídas', err),
     });
+  }
+
+  aplicarFiltro(): void {
+    if (this.prioridadeSelecionada) {
+      const prioridade = parseInt(this.prioridadeSelecionada, 10);
+
+      this.tarefasFiltradas.pendentes = this.pendentes.filter(
+        (tarefa) => tarefa.prioridade === prioridade
+      );
+      this.tarefasFiltradas.andamento = this.andamento.filter(
+        (tarefa) => tarefa.prioridade === prioridade
+      );
+      this.tarefasFiltradas.concluidas = this.concluidas.filter(
+        (tarefa) => tarefa.prioridade === prioridade
+      );
+    } else {
+      // Se nenhuma prioridade for selecionada, exibe todas as tarefas
+      this.tarefasFiltradas.pendentes = [...this.pendentes];
+      this.tarefasFiltradas.andamento = [...this.andamento];
+      this.tarefasFiltradas.concluidas = [...this.concluidas];
+    }
   }
 
   navigateToAddTarefa(): void {
@@ -63,11 +101,11 @@ export class DashboardComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
-  
+
       // Obtém a tarefa movida
       const tarefaMovida = event.container.data[event.currentIndex];
       console.log('Tarefa Movida:', tarefaMovida);
-  
+
       // Define o novo status baseado na lista de destino
       let novoStatus: string = '';
       if (event.container.id === 'pendentes') {
@@ -77,25 +115,24 @@ export class DashboardComponent implements OnInit {
       } else if (event.container.id === 'concluidas') {
         novoStatus = 'concluida';
       }
-  
+
       // Atualiza o status da tarefa no backend
       this.atualizarStatusTarefa(tarefaMovida, novoStatus);
     }
   }
-  
+
   atualizarStatusTarefa(tarefa: any, novoStatus: string): void {
     const url = `http://localhost:8080/tarefas/${tarefa.id}`;
-    
+
     // Atualiza apenas o campo de status no backend
     const payload = {
-      ...tarefa, // Mantenha os dados da tarefa existentes
-      status: novoStatus, // Atualize apenas o campo de status
+      ...tarefa,
+      status: novoStatus,
     };
     console.log('Payload enviado ao backend:', payload);
 
-  
     this.http.put(url, payload, { withCredentials: true }).subscribe({
-      next: (data) => {
+      next: (data: any) => {
         console.log('Status da tarefa atualizado com sucesso:', data);
       },
       error: (err) => {
@@ -103,5 +140,4 @@ export class DashboardComponent implements OnInit {
       },
     });
   }
-  
 }
