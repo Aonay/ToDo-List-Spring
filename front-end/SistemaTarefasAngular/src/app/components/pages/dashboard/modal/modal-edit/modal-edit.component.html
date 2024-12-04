@@ -25,6 +25,15 @@
       <input matInput [(ngModel)]="data.responsavel" name="responsavel" />
     </mat-form-field>
 
+    <mat-form-field appearance="fill">
+      <mat-label>Status</mat-label>
+      <select matNativeControl [(ngModel)]="data.status" name="status">
+        <option value="pendente">Pendente</option>
+        <option value="andamento">Andamento</option>
+        <option value="concluida">Concluída</option>
+      </select>
+    </mat-form-field>
+
   </form>
 </mat-dialog-content>
 

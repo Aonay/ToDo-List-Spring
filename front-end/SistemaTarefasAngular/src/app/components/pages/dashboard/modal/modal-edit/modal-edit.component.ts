@@ -42,7 +42,7 @@ export class ModalEditComponent {
       descricao: this.data.descricao || '',
       prioridade: this.data.prioridade || 0, // Padrão para prioridade
       responsavel: this.data.responsavel || '',
-      status: this.data.status 
+      status: this.data.status || '',
     };
 
     // Realizando a chamada PUT para atualizar a tarefa
@@ -51,7 +51,8 @@ export class ModalEditComponent {
         console.log('Tarefa atualizada com sucesso!', response);
 
         // Fecha o modal após o sucesso
-        this.dialogRef.close(true); // Envia um valor indicando sucesso
+        this.dialogRef.close(true);
+        window.location.reload();        // Envia um valor indicando sucesso
       },
       error: (err) => {
         console.error('Erro ao atualizar tarefa:', err);

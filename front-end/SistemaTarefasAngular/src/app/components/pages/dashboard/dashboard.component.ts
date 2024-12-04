@@ -185,7 +185,9 @@ export class DashboardComponent implements OnInit {
         id: tarefa.id, 
         titulo: tarefa.titulo, 
         descricao: tarefa.descricao, 
-        prioridade: tarefa.prioridade 
+        prioridade: tarefa.prioridade,
+        responsavel: tarefa.responsavel,
+        status: tarefa.status, 
       }, // Passa os campos individuais da tarefa para o modal
     });
   
