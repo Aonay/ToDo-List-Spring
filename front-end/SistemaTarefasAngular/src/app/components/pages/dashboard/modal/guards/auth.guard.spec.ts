@@ -9,7 +9,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     // Verifique se o usuário está autenticado (substitua isso pela sua lógica real)
-    const isAuthenticated = !!localStorage.getItem('userId'); // Exemplo: verifica se há um token no localStorage
+    const isAuthenticated = !!sessionStorage.getItem('userId'); // Exemplo: verifica se há um token no localStorage
 
     if (isAuthenticated) {
       return true; // Permite o acesso à rota
