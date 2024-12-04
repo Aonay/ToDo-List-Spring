@@ -51,25 +51,6 @@ public class TarefaController {
        return ResponseEntity.status(HttpStatus.CREATED).body(novaTarefa);
     }
 
-//   @PutMapping("/{id}")
-//   public ResponseEntity<Tarefa> atualizarTarefa(@PathVariable Long id, @Validated @RequestBody Tarefa tarefaAtualizada, HttpSession session) {
-//      Usuario usuario = (Usuario) session.getAttribute("usuario");
-//      if (usuario == null) {
-//         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-//      }
-//      Optional<Tarefa> tarefaExistenteOpt = tarefaService.buscarTarefaPorIdEUsuario(id, usuario);
-//      if (tarefaExistenteOpt.isEmpty()) {
-//         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tarefa não encontrada ou não pertence a você.");
-//      }
-//      Tarefa tarefaExistente = tarefaExistenteOpt.get();
-//      tarefaExistente.setStatus(tarefaAtualizada.getStatus());
-//      tarefaExistente.setDescricao(tarefaAtualizada.getDescricao());
-//      tarefaExistente.setPrioridade(tarefaAtualizada.getPrioridade());
-//      Tarefa tarefaSalva = tarefaService.salvarTarefa(tarefaExistente);
-//
-//      return ResponseEntity.ok(tarefaSalva);
-//   }
-
    @PutMapping("/{id}")
    public ResponseEntity<Tarefa> atualizarTarefa(@PathVariable Long id, @Validated @RequestBody Tarefa tarefaAtualizada, HttpSession session) {
       Usuario usuario = (Usuario) session.getAttribute("usuario");
@@ -108,6 +89,20 @@ public class TarefaController {
          return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
       }
       List<Tarefa> tarefaPrioridade = tarefaService.filtrarPorPrioridade(prioridade, usuario);
+      if (tarefaPrioridade.isEmpty()) {
+         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(tarefaPrioridade);
+      }
+
+      return ResponseEntity.ok(tarefaPrioridade);
+   }
+
+   @GetMapping("/responsavel/{responsavel}")
+   public ResponseEntity<List<Tarefa>> filtrarPorResponsavel(@PathVariable String responsavel, HttpSession session) {
+      Usuario usuario = (Usuario) session.getAttribute("usuario");
+      if (usuario == null) {
+         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+      }
+      List<Tarefa> tarefaPrioridade = tarefaService.filtrarPorResponsavel(responsavel, usuario);
       if (tarefaPrioridade.isEmpty()) {
          return ResponseEntity.status(HttpStatus.NOT_FOUND).body(tarefaPrioridade);
       }
@@ -158,16 +153,15 @@ public class TarefaController {
       return ResponseEntity.ok(concluidas);
    }
 
-
-//   @GetMapping("/status/count")
-//   public ResponseEntity<Map<String, Long>> contarTarefasPorStatus(HttpSession session) {
-//      if (session.getAttribute("usuario") == null) {
-//         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-//      }
-//      Usuario usuario = (Usuario) session.getAttribute("usuario");
-//      Map<String, Long> tarefas = tarefaService.contarTarefasPorStatus(usuario);
-//      return ResponseEntity.ok(tarefas);
-//   }
+   @GetMapping("/status/count")
+   public ResponseEntity<Map<String, Long>> contarTarefasPorStatus(HttpSession session) {
+      if (session.getAttribute("usuario") == null) {
+         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+      }
+      Usuario usuario = (Usuario) session.getAttribute("usuario");
+      Map<String, Long> tarefas = tarefaService.contarTarefasPorStatus(usuario);
+      return ResponseEntity.ok(tarefas);
+   }
 
    @GetMapping("/ordenar")
    public ResponseEntity<List<Tarefa>> ordenarPorTitulo(HttpSession session) {
@@ -179,19 +173,40 @@ public class TarefaController {
       return ResponseEntity.ok(tarefas);
    }
 
-   @PostMapping("/enviarEmail/{email}")
-   public ResponseEntity<String> enviarEmailCadastro(@PathVariable @Email String email, HttpSession session) {
+   @PatchMapping("/{id}/responsavel")
+   public ResponseEntity<Tarefa> atualizarResponsavel(@PathVariable Long id, @RequestBody Map<String, String> atualizacao, HttpSession session) {
+      // Verifica se o usuário está autenticado na sessão
       Usuario usuario = (Usuario) session.getAttribute("usuario");
       if (usuario == null) {
          return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
       }
-      try {emailService.enviarEmail(email,
-                 "Bem-vindo!",
-                 "Obrigado por se cadastrar na nossa plataforma."
-         );
+      Optional<Tarefa> tarefaExistente = tarefaService.buscarTarefaPorIdEUsuario(id, usuario);
+
+      if (tarefaExistente.isPresent()) {
+         Tarefa tarefa = tarefaExistente.get();
+         String novoResponsavel = atualizacao.get("responsavel");
+
+         if (novoResponsavel == null || novoResponsavel.trim().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+         }
+         tarefa.setResponsavel(novoResponsavel);
+         Tarefa tarefaAtualizada = tarefaService.salvarTarefa(tarefa);
+         return ResponseEntity.ok(tarefaAtualizada);
+      } else {
+         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tarefa não encontrada");
+      }
+   }
+
+   @PostMapping("/enviarEmail/{email}/{nome}")
+   public ResponseEntity<String> enviarEmailCadastro(@PathVariable @Email String email,@PathVariable String nome, HttpSession session) {
+      Usuario usuario = (Usuario) session.getAttribute("usuario");
+      if (usuario == null) {
+         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+      }
+      try {emailService.enviarEmail(email,nome);
          return ResponseEntity.ok("E-mail enviado com sucesso!");
       } catch (Exception e) {
-         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocorreu um erro ao enviar o e-mail.");
+         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocorreu um erro ao enviar o e-mail de baoas vindas.");
       }
    }
 }
