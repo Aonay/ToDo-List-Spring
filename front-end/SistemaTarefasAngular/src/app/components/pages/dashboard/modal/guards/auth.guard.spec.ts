@@ -8,8 +8,10 @@ export class AuthGuard implements CanActivate {
   constructor(private router: Router) {}
 
   canActivate(): boolean {
-    const isAuthenticated = !!sessionStorage.getItem('userId');
-    
+
+    // Verifique se o usuário está autenticado (substitua isso pela sua lógica real)
+    const isAuthenticated = !!sessionStorage.getItem('userId'); // Exemplo: verifica se há um token no localStorage
+
     if (isAuthenticated) {
       return true; // Permite o acesso à rota
     } else {
