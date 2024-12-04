@@ -22,14 +22,12 @@ export class FormLoginComponent {
   onSubmit() {
     this.http.post<any>(this.apiUrl, { email: this.email, senha: this.senha }, { withCredentials: true } ).subscribe({
       next: (response) => {
-        // Salva o nome e o ID do usuário na sessão (sessionStorage)
         sessionStorage.setItem('userName', response.nome); 
         sessionStorage.setItem('userId', response.id);
     
         alert('Login realizado com sucesso!');
         console.log(response);
-    
-        // Redireciona para o dashboard
+
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {

@@ -8,6 +8,7 @@ export class AuthGuard implements CanActivate {
   constructor(private router: Router) {}
 
   canActivate(): boolean {
+
     // Verifique se o usuário está autenticado (substitua isso pela sua lógica real)
     const isAuthenticated = !!sessionStorage.getItem('userId'); // Exemplo: verifica se há um token no localStorage
 
