@@ -1,5 +1,7 @@
 <main>
-  <header></header>
+  <header>
+    <button class="btnSair" (click)="sair()">Sair</button> <!-- Botão Sair -->
+  </header>
   <section class="section1">
     <div class="container">
       <div class="title">
@@ -9,22 +11,20 @@
         <h2>Seja bem vindo ao IntelliTASK.</h2>
         <div class="buttons">
           <button class="btnLogin" (click)="navigateToAddTarefa()">Adicionar Tarefa</button>
+          <div class="filtro-prioridade">
+            <label for="prioridade">Filtrar por Prioridade:</label>
+            <select id="prioridade" [(ngModel)]="prioridadeSelecionada">
+              <option value="">Todas</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+            <button (click)="aplicarFiltro()">Aplicar Filtro</button>
+          </div>
+
         </div>
       </div>
     </div>
-
-    <div class="filtro-prioridade">
-      <label for="prioridade">Filtrar por Prioridade:</label>
-      <select id="prioridade" [(ngModel)]="prioridadeSelecionada">
-        <option value="">Todas</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-      </select>
-      <button (click)="aplicarFiltro()">Aplicar Filtro</button>
-    </div>
-    
-    
   </section>
 
   <section class="colunas">
@@ -38,17 +38,22 @@
       [cdkDropListConnectedTo]="[andamentoList, concluidasList]"
       (cdkDropListDropped)="onDrop($event)"
     >
-      <h1>Pendentes</h1>
+      <h1 style="color: aliceblue;" >Pendentes</h1>
       <div
         *ngFor="let tarefa of tarefasFiltradas.pendentes"
         class="card_pendentes"
         cdkDrag
+        [ngClass]="{
+          'prioridade-1': tarefa.prioridade === 1,
+          'prioridade-2': tarefa.prioridade === 2,
+          'prioridade-3': tarefa.prioridade === 3
+        }"
       >
         <div class="card_content">
           <p><strong>Título:</strong> {{ tarefa.titulo }}</p>
           <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
           <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
-          <a (click)="excluirTarefa(tarefa.id)">Excluir</a>
+          <button mat-raised-button color="accent" (click)="excluirTarefa(tarefa.id)"> Excluir </button>
           <button mat-raised-button color="accent" (click)="openEditModal(tarefa)">
             Editar
           </button>
@@ -67,17 +72,22 @@
       [cdkDropListConnectedTo]="[pendentesList, concluidasList]"
       (cdkDropListDropped)="onDrop($event)"
     >
-      <h1>Em Andamento</h1>
+      <h1 style="color: aliceblue;">Em Andamento</h1>
       <div
-        *ngFor="let tarefa of tarefasFiltradas.andamento"
-        class="card_andamento"
-        cdkDrag
-      >
+      *ngFor="let tarefa of tarefasFiltradas.andamento"
+      class="card_andamento"
+      cdkDrag
+      [ngClass]="{
+        'prioridade-1': tarefa.prioridade === 1,
+        'prioridade-2': tarefa.prioridade === 2,
+        'prioridade-3': tarefa.prioridade === 3
+      }"
+    >
         <div class="card_content">
           <p><strong>Título:</strong> {{ tarefa.titulo }}</p>
           <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
           <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
-          <a (click)="excluirTarefa(tarefa.id)">Excluir</a>
+          <button mat-raised-button color="accent" (click)="excluirTarefa(tarefa.id)"> Excluir </button>
           <button mat-raised-button color="accent" (click)="openEditModal(tarefa)">
             Editar
           </button>
@@ -96,17 +106,22 @@
       [cdkDropListConnectedTo]="[pendentesList, andamentoList]"
       (cdkDropListDropped)="onDrop($event)"
     >
-      <h1>Concluídas</h1>
+      <h1 style="color: aliceblue;">Concluídas</h1>
       <div
-        *ngFor="let tarefa of tarefasFiltradas.concluidas"
-        class="card_concluidas"
-        cdkDrag
-      >
+      *ngFor="let tarefa of tarefasFiltradas.concluidas"
+      class="card_concluidas"
+      cdkDrag
+      [ngClass]="{
+        'prioridade-1': tarefa.prioridade === 1,
+        'prioridade-2': tarefa.prioridade === 2,
+        'prioridade-3': tarefa.prioridade === 3
+      }"
+    >
         <div class="card_content">
           <p><strong>Título:</strong> {{ tarefa.titulo }}</p>
           <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
           <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
-          <a (click)="excluirTarefa(tarefa.id)">Excluir</a>
+          <button mat-raised-button color="accent" (click)="excluirTarefa(tarefa.id)"> Excluir </button>
           <button mat-raised-button color="accent" (click)="openEditModal(tarefa)">
             Editar
           </button>

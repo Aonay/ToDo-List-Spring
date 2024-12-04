@@ -132,6 +132,7 @@ export class DashboardComponent implements OnInit {
       ...tarefa,
       status: novoStatus,
     };
+
     console.log('Payload enviado ao backend:', payload);
   
     this.http.put(url, payload, { withCredentials: true }).subscribe({
@@ -196,5 +197,13 @@ export class DashboardComponent implements OnInit {
     });
   }
   
+  sair(): void {
+    
+    sessionStorage.removeItem('userId');
+    sessionStorage.removeItem('userName');
+    
+    // Redirecionar para a página de login
+    this.router.navigate(['/login']); 
+  }
   
 }

@@ -8,6 +8,35 @@ main {
     background-color: #000000;
     color: #fff;
 
+    header {
+        position: relative;
+        width: 100%;
+      }
+      
+      .btnSair {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        background-color: #000000;
+        border-top: 1px solid #ff00b1;
+        border-right: 2px solid #960772;
+        border-left: 2px solid #b520f8;
+        border-bottom: 2px solid #ff8400;
+        color: white;
+        border-radius: 0px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+      
+      .btnSair:hover {
+        box-shadow: 0 0 #333;
+        color: #fff;
+        background-color: #202020;
+    
+      }
+
 
     .section1 {
         max-width: 80%;
@@ -30,6 +59,39 @@ main {
 
             gap: 50px;
             margin-top: 20px;
+            display: flex;
+
+            .buttons {
+                display: flex;
+                gap: 20px; /* Espaço entre os botões */
+                align-items: center; /* Alinha verticalmente */
+                margin-top: 20px;
+            }
+            
+            .filtro-prioridade {
+                display: flex;
+                align-items: center; /* Alinha os itens verticalmente */
+                gap: 10px; /* Espaço entre os itens */
+            }
+            
+            .filtro-prioridade select,
+            .filtro-prioridade button {
+                padding: 5px 10px;
+                font-size: 16px;
+            }
+            
+            .filtro-prioridade button {
+                background-color: #000000;
+                color: #ffffff;
+                border: solid white 1px;
+                border-radius: 0px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+            
+            .filtro-prioridade button:hover {
+                background-color: #504e4e;
+            }
 
 
             .btnLogin {
@@ -81,12 +143,26 @@ main {
 
             .buttons {
                 gap: 30px;
+                
             }
 
             .btnLogin,
             .btnCadastro {
                 padding: 12px;
+                
             }
+
+            .filtro-prioridade {
+                flex-direction: column; /* Alinha os itens em coluna */
+                gap: 15px; /* Espaçamento entre os itens */
+                width: 100%; /* Garante que ocupe toda a largura disponível */
+            }
+        
+            .filtro-prioridade select,
+            .filtro-prioridade button {
+                width: 100%; /* Faz com que o select e o botão ocupem a largura total */
+            }
+
         }
 
         @media (max-width: 768px) {
@@ -114,6 +190,8 @@ main {
             .btnCadastro {
                 padding: 10px;
             }
+
+
         }
 
         @media (max-width: 480px) {
@@ -140,8 +218,11 @@ main {
             .btnCadastro {
                 padding: 8px;
             }
+
+
         }
 
+        
     }
 
     .colunas {
@@ -159,17 +240,39 @@ main {
         flex: 1;
         /* Divide o espaço igualmente entre as colunas */
         background-color: rgb(0, 0, 0);
-        color: rgb(255, 255, 255);
+        color: rgb(0, 0, 0);
         padding: 20px;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         overflow-y: auto;
         /* Permite rolagem vertical */
         max-height: calc(100vh - 150px);
         /* Ajusta a altura restante, subtraindo o cabeçalho */
+        
+        .prioridade-1 {
+            border: rgb(245, 71, 71) solid 2px;
+            border-left: 8px solid rgb(245, 71, 71);
+            background-color: #ffd4d4;
+
+          }
+          
+          .prioridade-2 {
+            border: rgb(255, 251, 17) solid 2px;
+            border-left: 8px solid rgb(255, 251, 17);
+            background-color: #fffed1;
+            
+
+          }
+          
+          .prioridade-3 {
+            border: rgb(4, 219, 130) solid 2px;
+            border-left: 8px solid rgb(4, 219, 130);
+            background-color: #d0fceb;
+          }
+
 
         .card_pendentes {
-            background-color: #f8507a;
-            border-left: solid #007bff;
+            /* background-color: #ebebeb; */
+            /* border-left: solid #007bff; */
             padding: 1rem;
             margin: 0.5rem 0;
             border-radius: 8px;
@@ -178,7 +281,7 @@ main {
         }
 
         .card_andamento {
-            background-color: #ffec1d;
+            /* background-color: #ebebeb; */
             padding: 1rem;
             margin: 0.5rem 0;
             border-radius: 8px;
@@ -187,7 +290,7 @@ main {
         }
 
         .card_concluidas {
-            background-color: #45b11a;
+            /* background-color: #ebebeb; */
             padding: 1rem;
             margin: 0.5rem 0;
             border-radius: 8px;

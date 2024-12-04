@@ -198,15 +198,13 @@ public class TarefaController {
    }
 
    @PostMapping("/enviarEmail/{email}/{nome}")
-   public ResponseEntity<String> enviarEmailCadastro(@PathVariable @Email String email,@PathVariable String nome, HttpSession session) {
-      Usuario usuario = (Usuario) session.getAttribute("usuario");
-      if (usuario == null) {
-         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-      }
-      try {emailService.enviarEmail(email,nome);
+   public ResponseEntity<String> enviarEmailCadastro(@PathVariable @Email String email, @PathVariable String nome) {
+      try {
+         emailService.enviarEmail(email, nome);
          return ResponseEntity.ok("E-mail enviado com sucesso!");
       } catch (Exception e) {
-         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocorreu um erro ao enviar o e-mail de baoas vindas.");
+         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocorreu um erro ao enviar o e-mail de boas-vindas.");
       }
    }
+
 }

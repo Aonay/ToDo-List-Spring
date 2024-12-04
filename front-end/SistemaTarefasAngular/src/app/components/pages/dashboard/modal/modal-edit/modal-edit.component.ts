@@ -18,8 +18,8 @@ import { HttpClient } from '@angular/common/http';
     MatFormFieldModule, 
     MatInputModule, 
     MatSelectModule, 
-    MatDialogModule,  // Importando MatDialogModule
-    FormsModule // Para usar ngModel
+    MatDialogModule,  
+    FormsModule 
   ],  
   templateUrl: './modal-edit.component.html',
   styleUrls: ['./modal-edit.component.css'],

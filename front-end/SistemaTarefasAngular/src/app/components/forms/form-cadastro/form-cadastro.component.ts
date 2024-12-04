@@ -16,8 +16,11 @@ export class FormCadastroComponent {
   email: string = '';
   senha: string = '';
   private apiUrl = 'http://localhost:8080/usuarios/registrar';
+  private emailApiUrl = 'http://localhost:8080/tarefas/enviarEmail';
+
 
   constructor(private http: HttpClient, private router: Router) {}
+
 
   onSubmit() {
     const userData = {
@@ -29,11 +32,26 @@ export class FormCadastroComponent {
     this.http.post(this.apiUrl, userData).subscribe({
       next: (response) => {
         alert('Cadastro realizado com sucesso!');
-        console.log(response);
+        console.log('Cadastro:', response);
+
+        // Requisição para enviar o e-mail
+        this.http
+          .post(`${this.emailApiUrl}/${this.email}/${this.nome}`, {})
+          .subscribe({
+            next: (emailResponse) => {
+              console.log('E-mail enviado com sucesso:', emailResponse);
+            },
+            error: (emailError) => {
+              console.error('Erro ao enviar e-mail:', emailError);
+            },
+            
+          });
+          this.router.navigate(['/home']);
+
       },
       error: (error) => {
         alert('Erro ao realizar cadastro.');
-        console.error(error);
+        console.error('Erro no cadastro:', error);
       },
     });
   }
