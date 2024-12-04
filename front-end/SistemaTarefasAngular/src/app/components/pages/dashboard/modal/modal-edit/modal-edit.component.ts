@@ -34,9 +34,10 @@ export class ModalEditComponent {
   salvar(): void {
     // URL para a requisição PUT
     const url = `http://localhost:8080/tarefas/${this.data.id}`;
+    console.log(this.data)
 
     // Realizando a chamada PUT para o backend
-    this.http.put(url, this.data).subscribe({
+    this.http.put(url, this.data, { withCredentials: true }).subscribe({
       next: (response) => {
         console.log('Tarefa atualizada com sucesso!', response);
       },
