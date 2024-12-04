@@ -41,6 +41,8 @@ export class ModalEditComponent {
       titulo: this.data.titulo || '', // Garante que o campo não seja nulo
       descricao: this.data.descricao || '',
       prioridade: this.data.prioridade || 0, // Padrão para prioridade
+      responsavel: this.data.responsavel || '',
+      status: this.data.status 
     };
 
     // Realizando a chamada PUT para atualizar a tarefa
