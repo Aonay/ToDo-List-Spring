@@ -1,0 +1,92 @@
+.container {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 30px;
+    border-radius: 0px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    text-align: center;
+    border-top: 1px solid #ff00b1;
+    border-right: 2px solid #960772;
+    border-left: 2px solid #b520f8;
+    border-bottom: 2px solid #ff8400;
+    box-shadow: 10px 10px 0px 0px rgba(51, 51, 51, 1);
+  }
+  
+  .container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-group {
+    text-align: left;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #fff;
+  }
+  
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    font-size: 16px;
+    background-color: #f8f8f8;
+  }
+  
+  textarea {
+    resize: none;
+  }
+  
+  .btn-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .btnCancelar {
+    background-color: transparent;
+    color: #ff5e57;
+    padding: 10px 20px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .btnSalvar {
+    background-color: #ff5e57;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.4s ease;
+  }
+  
+  .btnSalvar:hover {
+    background-color: #7d4cf1;
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
