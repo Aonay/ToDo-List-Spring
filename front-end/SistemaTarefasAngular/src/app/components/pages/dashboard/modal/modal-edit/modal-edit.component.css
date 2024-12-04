@@ -1,9 +1,9 @@
 .container {
     position: relative;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0);
     padding: 30px;
     border-radius: 0px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0);
     width: 400px;
     text-align: center;
     border-top: 1px solid #ff00b1;
@@ -19,6 +19,7 @@
     color: #fff;
   }
   
+
   form {
     display: flex;
     flex-direction: column;
