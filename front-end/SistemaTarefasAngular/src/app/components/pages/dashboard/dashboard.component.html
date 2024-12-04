@@ -38,7 +38,7 @@
       [cdkDropListConnectedTo]="[andamentoList, concluidasList]"
       (cdkDropListDropped)="onDrop($event)"
     >
-      <h1 style="color: aliceblue;" >Pendentes</h1>
+      <h1 style="color: aliceblue; font-size: 40px;" >Pendentes</h1>
       <div
         *ngFor="let tarefa of tarefasFiltradas.pendentes"
         class="card_pendentes"
@@ -73,7 +73,7 @@
       [cdkDropListConnectedTo]="[pendentesList, concluidasList]"
       (cdkDropListDropped)="onDrop($event)"
     >
-      <h1 style="color: aliceblue;">Em Andamento</h1>
+      <h1 style="color: aliceblue; font-size: 40px;">Em Andamento</h1>
       <div
       *ngFor="let tarefa of tarefasFiltradas.andamento"
       class="card_andamento"
@@ -108,7 +108,7 @@
       [cdkDropListConnectedTo]="[pendentesList, andamentoList]"
       (cdkDropListDropped)="onDrop($event)"
     >
-      <h1 style="color: aliceblue;">Concluídas</h1>
+      <h1 style="color: aliceblue; font-size: 40px;">Concluídas</h1>
       <div
       *ngFor="let tarefa of tarefasFiltradas.concluidas"
       class="card_concluidas"
