@@ -40,6 +40,7 @@ public class TarefaController {
        return ResponseEntity.ok(tarefas);
     }
 
+    @Operation(summary = "Insere uma nova tarefa vinculada ao usuario logado")
     @PostMapping("/")
     public ResponseEntity<Tarefa> criarTarefa(@Validated @RequestBody Tarefa tarefa, HttpSession session) {
        Usuario usuario = (Usuario) session.getAttribute("usuario");
@@ -51,6 +52,7 @@ public class TarefaController {
        return ResponseEntity.status(HttpStatus.CREATED).body(novaTarefa);
     }
 
+   @Operation(summary = "Edita a tarefa do Id selecionado")
    @PutMapping("/{id}")
    public ResponseEntity<Tarefa> atualizarTarefa(@PathVariable Long id, @Validated @RequestBody Tarefa tarefaAtualizada, HttpSession session) {
       Usuario usuario = (Usuario) session.getAttribute("usuario");
@@ -67,6 +69,7 @@ public class TarefaController {
       }
    }
 
+   @Operation(summary = "Apaga a tarefa do ID Selecionado")
    @DeleteMapping("/{id}")
    public ResponseEntity<Void> deleteTarefa(@PathVariable Long id, HttpSession session) {
       Usuario usuario = (Usuario) session.getAttribute("usuario");
@@ -82,6 +85,7 @@ public class TarefaController {
       }
    }
 
+   @Operation(summary = "Exibe as tarefas por prioridade")
    @GetMapping("/prioridade/{prioridade}")
    public ResponseEntity<List<Tarefa>> exibirPorPrioridade(@PathVariable int prioridade, HttpSession session) {
       Usuario usuario = (Usuario) session.getAttribute("usuario");
@@ -96,6 +100,7 @@ public class TarefaController {
       return ResponseEntity.ok(tarefaPrioridade);
    }
 
+   @Operation(summary = "Exibe a tarefa do usuario selecionado")
    @GetMapping("/responsavel/{responsavel}")
    public ResponseEntity<List<Tarefa>> filtrarPorResponsavel(@PathVariable String responsavel, HttpSession session) {
       Usuario usuario = (Usuario) session.getAttribute("usuario");
@@ -110,6 +115,7 @@ public class TarefaController {
       return ResponseEntity.ok(tarefaPrioridade);
    }
 
+   @Operation(summary = "Exibe as tarefas do status selecionado")
    @GetMapping("/status/{status}")
    public ResponseEntity<List<Tarefa>> exibirPorStatus(@PathVariable String status, HttpSession session) {
       Usuario usuario = (Usuario) session.getAttribute("usuario");
@@ -123,6 +129,7 @@ public class TarefaController {
       return ResponseEntity.ok(tarefaStatus);
    }
 
+   @Operation(summary = "Exibe apenas as tarefas com Status PENDENTE")
    @GetMapping("/status/pendentes")
    public ResponseEntity<List<Tarefa>> listarPendentes(HttpSession session) {
       Usuario usuario = (Usuario) session.getAttribute("usuario");
@@ -133,6 +140,7 @@ public class TarefaController {
       return ResponseEntity.ok(pendentes);
    }
 
+   @Operation(summary = "Exibe apenas as tarefas com Status EM ADAMENTO")
    @GetMapping("/status/em-andamento")
    public ResponseEntity<List<Tarefa>> listarEmAndamento(HttpSession session) {
       Usuario usuario = (Usuario) session.getAttribute("usuario");
@@ -143,6 +151,7 @@ public class TarefaController {
       return ResponseEntity.ok(emAndamento);
    }
 
+   @Operation(summary = "Exibe apenas as tarefas com Status CONCLUIDA")
    @GetMapping("/status/concluidas")
    public ResponseEntity<List<Tarefa>> listarConcluidas(HttpSession session) {
       Usuario usuario = (Usuario) session.getAttribute("usuario");
@@ -153,6 +162,7 @@ public class TarefaController {
       return ResponseEntity.ok(concluidas);
    }
 
+   @Operation(summary = "Retorna a quantidade de tarefas do status selecionado")
    @GetMapping("/status/count")
    public ResponseEntity<Map<String, Long>> contarTarefasPorStatus(HttpSession session) {
       if (session.getAttribute("usuario") == null) {
@@ -163,6 +173,7 @@ public class TarefaController {
       return ResponseEntity.ok(tarefas);
    }
 
+   @Operation(summary = "Ordena as em ordem crescente por Titulo")
    @GetMapping("/ordenar")
    public ResponseEntity<List<Tarefa>> ordenarPorTitulo(HttpSession session) {
       Usuario usuario = (Usuario) session.getAttribute("usuario");
@@ -173,6 +184,7 @@ public class TarefaController {
       return ResponseEntity.ok(tarefas);
    }
 
+   @Operation(summary = "Atribui um responsavel a Tarefa existente")
    @PatchMapping("/{id}/responsavel")
    public ResponseEntity<Tarefa> atualizarResponsavel(@PathVariable Long id, @RequestBody Map<String, String> atualizacao, HttpSession session) {
       // Verifica se o usuário está autenticado na sessão
@@ -197,6 +209,7 @@ public class TarefaController {
       }
    }
 
+   @Operation(summary = "Envia um email de boas vindas a aplicacao")
    @PostMapping("/enviarEmail/{email}/{nome}")
    public ResponseEntity<String> enviarEmailCadastro(@PathVariable @Email String email, @PathVariable String nome) {
       try {

@@ -14,7 +14,9 @@ export const routes: Routes = [
     { path: 'login', component: FormLoginComponent }, 
     { path: 'cadastro', component: FormCadastroComponent }, 
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }, // Protege a rota com o guard
+
     { path: 'tarefas', component: FormTarefaComponent, canActivate: [AuthGuard]  } 
+
   ];
 
   @NgModule({
