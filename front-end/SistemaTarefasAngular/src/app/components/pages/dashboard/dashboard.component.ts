@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { CdkDragDrop, transferArrayItem, moveItemInArray } from '@angular/cdk/drag-drop'; // Drag and drop
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalEditComponent } from './modal/modal-edit/modal-edit.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -30,7 +32,7 @@ export class DashboardComponent implements OnInit {
 
   private apiBaseUrl = 'http://localhost:8080/tarefas/status';
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private dialog: MatDialog, private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.nomeUsuario = sessionStorage.getItem('userName');
@@ -174,5 +176,25 @@ export class DashboardComponent implements OnInit {
       });
     }
   }
+
+  openEditModal(tarefa: any): void {
+    const dialogRef = this.dialog.open(ModalEditComponent, {
+      width: '400px',
+      data: { 
+        id: tarefa.id, 
+        titulo: tarefa.titulo, 
+        descricao: tarefa.descricao, 
+        prioridade: tarefa.prioridade 
+      }, // Passa os campos individuais da tarefa para o modal
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log('Modal fechado com dados:', result);
+        this.carregarTarefas(); // Recarrega as tarefas se houve alteração
+      }
+    });
+  }
+  
   
 }

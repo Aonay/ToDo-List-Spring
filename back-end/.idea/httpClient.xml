@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="HttpClientEndpointsTabState">
-    <option name="requestToText" value="&lt;CachedHttpClientTabRequests&gt;&#10;  &lt;entry key=&quot;869adb38f349b88a68037ee34ede8175a1ba50fe&quot; value=&quot;###&amp;#10;DELETE http://localhost:8080/tarefas/{{id}}&quot; /&gt;&#10;  &lt;entry key=&quot;71a1f47263320c72f44e8f976ae6e8b6024bfb8c&quot; value=&quot;###&amp;#10;GET http://localhost:8080/tarefas/status/{{status}}&quot; /&gt;&#10;  &lt;entry key=&quot;982228ba528c5bc96ec9c166406c4d213d76bca5&quot; value=&quot;###&amp;#10;PUT http://localhost:8080/tarefas/{{id}}&amp;#10;Content-Type: application/json&amp;#10;&amp;#10;{&amp;#10;  &amp;quot;id&amp;quot;: 0,&amp;#10;  &amp;quot;titulo&amp;quot;: &amp;quot;&amp;quot;,&amp;#10;  &amp;quot;descricao&amp;quot;: &amp;quot;&amp;quot;,&amp;#10;  &amp;quot;prioridade&amp;quot;: 0,&amp;#10;  &amp;quot;status&amp;quot;: &amp;quot;&amp;quot;,&amp;#10;  &amp;quot;responsavel&amp;quot;: &amp;quot;&amp;quot;&amp;#10;}&quot; /&gt;&#10;&lt;/CachedHttpClientTabRequests&gt;" />
-  </component>
-</project>

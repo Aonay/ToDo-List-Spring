@@ -49,6 +49,9 @@
           <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
           <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
           <a (click)="excluirTarefa(tarefa.id)">Excluir</a>
+          <button mat-raised-button color="accent" (click)="openEditModal(tarefa)">
+            Editar
+          </button>
 
         </div>
       </div>
@@ -75,6 +78,9 @@
           <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
           <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
           <a (click)="excluirTarefa(tarefa.id)">Excluir</a>
+          <button mat-raised-button color="accent" (click)="openEditModal(tarefa)">
+            Editar
+          </button>
 
         </div>
       </div>
@@ -101,6 +107,10 @@
           <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
           <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
           <a (click)="excluirTarefa(tarefa.id)">Excluir</a>
+          <button mat-raised-button color="accent" (click)="openEditModal(tarefa)">
+            Editar
+          </button>
+          
         </div>
       </div>
     </div>
