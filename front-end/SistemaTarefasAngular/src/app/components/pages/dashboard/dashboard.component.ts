@@ -192,7 +192,7 @@ export class DashboardComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         console.log('Modal fechado com dados:', result);
-        this.carregarTarefas(); // Recarrega as tarefas se houve alteração
+        this.sincronizarListas(); // Recarrega as tarefas se houve alteração
       }
     });
   }
