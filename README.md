@@ -1,27 +1,74 @@
-# SistemaTarefasAngular
+# **Sistema de Tarefas**
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.12.
+[![Java](https://img.shields.io/badge/Java-17-blue)](https://www.oracle.com/java/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.7-green)](https://spring.io/projects/spring-boot)
+[![Angular](https://img.shields.io/badge/Angular-15-red)](https://angular.io/)
 
-## Development server
+## **Descrição**
+Este é um sistema de gerenciamento de tarefas onde os usuários podem:
+- Criar contas e fazer login.
+- Criar, editar e deletar tarefas.
+- Visualizar tarefas organizadas por status (Pendentes, Em andamento, Concluídas).
+- Filtrar tarefas por prioridade.
+- Utilizar funcionalidades de **drag and drop** para alterar o status das tarefas.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+O sistema é composto por um backend desenvolvido em **Java com Spring Boot** e um frontend construído em **Angular**.
 
-## Code scaffolding
+---
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## **Funcionalidades**
+- **Autenticação:**
+  - Registro de usuários.
+  - Login e gerenciamento de sessão com cookies.
+  
+- **Gerenciamento de Tarefas:**
+  - Adicionar, editar e deletar tarefas.
+  - Organização por status e prioridade.
+  - Alteração do status por drag and drop.
 
-## Build
+- **Filtros:**
+  - Filtrar tarefas por prioridade.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Notificações:**
+  - Envio de e-mails após o registro do usuário.
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## **Tecnologias Utilizadas**
 
-## Running end-to-end tests
+### **Backend:**
+- **Java 17**
+- **Spring Boot 2.7**
+  - Spring Data JPA
+  - Hibernate
+  - Spring Security (opcional)
+- **MySQL** (banco de dados)
+- **Maven** (gerenciamento de dependências)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### **Frontend:**
+- **Angular 15**
+- **TypeScript**
+- **Material Design**
+- **RxJS** (para manipulação de dados assíncronos)
 
-## Further help
+---
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## **Requisitos**
+
+### **Backend:**
+- **Java 17+**
+- **MySQL** (ou outro banco de dados relacional configurado no `application.properties`)
+- **Maven**
+
+### **Frontend:**
+- **Node.js 16+**
+- **Angular CLI**
+
+---
+
+## **Como Rodar o Projeto**
+
+### **1. Clonar o Repositório**
+```bash
+git clone https://github.com/seu-usuario/sistema-de-tarefas.git
+cd sistema-de-tarefas
