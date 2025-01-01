@@ -1,4 +1,4 @@
-# **Sistema de Tarefas**
+# **IntelliTask - Sistema de Tarefas**
 <img align="center" src="https://skillicons.dev/icons?i=java,spring,angular,postgres,aws">
 
 ## **Descrição**
