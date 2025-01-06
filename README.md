@@ -59,9 +59,10 @@ O sistema é composto por um backend desenvolvido em **Java com Spring Boot** e 
 
 ### **Backend:**
 - **Java 17**
-- **Spring Boot 3.4**
+- **Spring Boot**
   - Spring Data JPA
   - Hibernate
+  - Spring Web
 - **PostgreSQL**
 - **Maven**
 
