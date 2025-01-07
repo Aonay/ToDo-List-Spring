@@ -1,5 +1,6 @@
 # **IntelliTask - Sistema de Tarefas**
 <img align="center" src="https://skillicons.dev/icons?i=java,spring,angular,postgres,aws">
+![2025-01-07 18-25-41](https://github.com/user-attachments/assets/9c065557-25df-4daa-9c8f-626d4c59c0be)
 
 ## **Descrição**
 Este é um sistema de gerenciamento de tarefas onde os usuários podem:
