@@ -39,19 +39,25 @@ O sistema é composto por um backend desenvolvido em **Java com Spring Boot** e 
 | POST   | `/usuarios/logout`    | Realiza logout do usuário    |
 
 ### **Tarefas**
-| Método | Endpoint                | Descrição                     |
-|--------|-------------------------|-------------------------------|
-| GET    | `/tarefas/status`       | Retorna tarefas por status    |
-| POST   | `/tarefas`              | Adiciona uma nova tarefa      |
-| GET    | `/tarefas/{id}`         | Retorna uma tarefa específica |
-| PUT    | `/tarefas/{id}`         | Atualiza uma tarefa existente |
-| DELETE | `/tarefas/{id}`         | Remove uma tarefa             |
+| Método | Endpoint                    | Descrição                     |
+|--------|------------------------- ---|-------------------------------|
+| GET    | `/tarefas/status`           | Retorna tarefas por status    |
+| POST   | `/tarefas`                  | Adiciona uma nova tarefa      |
+| GET    | `/tarefas/{id}`             | Retorna uma tarefa específica |
+| PUT    | `/tarefas/{id}`             | Atualiza uma tarefa existente |
+| PATCH  | `/tarefas/{id}/responsavel` | Atribui um responsavel a Tarefa existente |
+| DELETE | `/tarefas/{id}`             | Remove uma tarefa             |
 
 ### **Filtros**
-| Método | Endpoint                      | Descrição                          |
-|--------|-------------------------------|------------------------------------|
-| GET    | `/tarefas/status/{status}`    | Retorna tarefas filtradas por status |
-| GET    | `/tarefas/prioridade/{nivel}` | Retorna tarefas filtradas por prioridade |
+| Método | Endpoint                           | Descrição                          |
+|--------|------------------------------------|------------------------------------|
+| GET    | `/tarefas/status/{status}`         | Retorna tarefas filtradas por status |
+| GET    | `/tarefas/prioridade/{nivel}`      | Retorna tarefas filtradas por prioridade |
+| GET    | `tarefas/responsavel/{responsavel` | Retorna tarefas filtradas por responsável |
+| GET    | `/tarefas/status/{pendentes}`      | Retorna tarefas pendentes |
+| GET    | `/tarefas/status/{em-andamento}`   | Retorna tarefas em andamento |
+| GET    | `/tarefas/status/{concluidas}`     | Retorna tarefas concluídas |
+
 
 ---
 
