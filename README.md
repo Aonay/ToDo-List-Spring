@@ -40,7 +40,7 @@ O sistema é composto por um backend desenvolvido em **Java com Spring Boot** e 
 
 ### **Tarefas**
 | Método | Endpoint                    | Descrição                     |
-|--------|------------------------- ---|-------------------------------|
+|--------|-----------------------------|-------------------------------|
 | GET    | `/tarefas/status`           | Retorna tarefas por status    |
 | POST   | `/tarefas`                  | Adiciona uma nova tarefa      |
 | GET    | `/tarefas/{id}`             | Retorna uma tarefa específica |
